@@ -3,22 +3,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView layoutY="-2.0" prefHeight="472.0"
-	prefWidth="1077.0">
+<TableView layoutY="-2.0" prefHeight="472.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 	<columns>
-		<TableColumn prefWidth="147.7333948612213"
-			text="Numéro du document" />
-		<TableColumn minWidth="2.6666336059570312"
-			prefWidth="232.26669311523438" text="Titre" />
-		<TableColumn minWidth="2.6666336059570312"
-			prefWidth="163.73330688476562" text="Auteur/Réalisateur" />
-		<TableColumn minWidth="2.6666336059570312"
-			prefWidth="168.266845703125" text="Date de parution" />
-		<TableColumn minWidth="2.6666336059570312"
-			prefWidth="141.33319091796875" text="État" />
-		<TableColumn minWidth="2.6666336059570312"
-			prefWidth="110.13336181640625" text="Nb. prêts" />
-		<TableColumn minWidth="2.6666336059570312"
-			prefWidth="110.13336181640625" text="Emprunteur" />
+		<TableColumn prefWidth="147.7333948612213" text="Numéro du document" />
+		<TableColumn minWidth="2.6666336059570312" prefWidth="248.0" text="Titre" />
+		<TableColumn minWidth="2.6666336059570312" prefWidth="160.0" text="Auteur/Réalisateur" />
+		<TableColumn minWidth="2.6666336059570312" prefWidth="170.0" text="Date de parution" />
+		<TableColumn minWidth="2.6666336059570312" prefWidth="149.0" text="État" />
+		<TableColumn minWidth="2.6666336059570312" prefWidth="162.0" text="Nb. prêts" />
+		<TableColumn minWidth="2.6666336059570312" prefWidth="212.0" text="Emprunteur" />
 	</columns>
 </TableView>
