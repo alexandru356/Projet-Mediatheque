@@ -42,7 +42,7 @@ public class DVDController {
 	
 	@FXML
 	public void initialize () {
-		tableView.setItems(lstObsDVD);
+		
 	}
 	
 }

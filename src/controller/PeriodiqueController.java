@@ -44,6 +44,5 @@ public class PeriodiqueController {
 	
 	@FXML
 	public void initialize () {
-		tableView.setItems(lstObsPeriodique);
 	}
 }

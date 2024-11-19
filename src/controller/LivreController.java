@@ -41,6 +41,5 @@ public class LivreController {
 	
 	@FXML
 	public void initialize () {
-		tableView.setItems(lstObsLivre);
 	}
 }

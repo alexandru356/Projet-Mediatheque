@@ -42,6 +42,6 @@ public class DocumentController {
 	
 	@FXML
 	public void initialize() {
-		tableView.setItems(lstObsDoc);
+		
 	}
 }
