@@ -1,24 +1,28 @@
 package model;
 
+import java.time.LocalDate;
+
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Periodique {
 
-	private StringProperty identifiant;
+	private StringProperty numDoc;
 	private StringProperty titre;
-	private StringProperty datePublication;
+	private ObjectProperty<LocalDate> datePublication;
 	private IntegerProperty numVolume;
 	private IntegerProperty numPeriodique;
 	private StringProperty auteur;
 
 
-	public Periodique(String identifiant, String titre, String datePublication, int numVolume, int numPeriodique, String auteur) {
-		this.identifiant = new SimpleStringProperty(identifiant);
+	public Periodique(String numDoc, String titre, String datePublication, int numVolume, int numPeriodique, String auteur) {
+		this.numDoc = new SimpleStringProperty(numDoc);
 		this.titre = new SimpleStringProperty(titre);
-		this.datePublication = new SimpleStringProperty(datePublication);
+		this.datePublication = new SimpleObjectProperty(datePublication);
 		this.numVolume = new SimpleIntegerProperty(numVolume);
 		this.numPeriodique = new SimpleIntegerProperty(numPeriodique);
 		this.auteur = new SimpleStringProperty(auteur);
@@ -31,31 +35,11 @@ public class Periodique {
 		StringBuilder sb = new StringBuilder();
 
 		return sb.append("Livre: \n")
-				.append("ID: " + identifiant + "\n")
+				.append("ID: " + numDoc + "\n")
 				.append("Titre: " + titre + "\n")
 				.append("Date de publication: " + datePublication + "\n")
 				.append("Numéro du Volume: " + numVolume + "\n")
 				.append("Numéro du périodique: " + numPeriodique).toString();
-	}
-
-
-
-	public final StringProperty identifiantProperty() {
-		return this.identifiant;
-	}
-
-
-
-
-	public final String getIdentifiant() {
-		return this.identifiantProperty().get();
-	}
-
-
-
-
-	public final void setIdentifiant(final String identifiant) {
-		this.identifiantProperty().set(identifiant);
 	}
 
 
@@ -82,23 +66,6 @@ public class Periodique {
 
 
 
-	public final StringProperty datePublicationProperty() {
-		return this.datePublication;
-	}
-
-
-
-
-	public final String getDatePublication() {
-		return this.datePublicationProperty().get();
-	}
-
-
-
-
-	public final void setDatePublication(final String datePublication) {
-		this.datePublicationProperty().set(datePublication);
-	}
 
 
 
@@ -162,6 +129,48 @@ public class Periodique {
 	public final void setAuteur(final String auteur) {
 		this.auteurProperty().set(auteur);
 	}
+
+
+
+	public final ObjectProperty<LocalDate> datePublicationProperty() {
+		return this.datePublication;
+	}
+	
+
+
+
+	public final LocalDate getDatePublication() {
+		return this.datePublicationProperty().get();
+	}
+	
+
+
+
+	public final void setDatePublication(final LocalDate datePublication) {
+		this.datePublicationProperty().set(datePublication);
+	}
+
+
+
+	public final StringProperty numDocProperty() {
+		return this.numDoc;
+	}
+	
+
+
+
+	public final String getNumDoc() {
+		return this.numDocProperty().get();
+	}
+	
+
+
+
+	public final void setNumDoc(final String numDoc) {
+		this.numDocProperty().set(numDoc);
+	}
+	
+	
 
 
 }

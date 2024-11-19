@@ -5,8 +5,6 @@ import javafx.beans.property.StringProperty;
 
 public class Personne {
 
-
-
 	private StringProperty nom;
 	private StringProperty prenom;
 	private StringProperty numTelephone;

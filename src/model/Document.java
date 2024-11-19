@@ -1,39 +1,30 @@
 package model;
 
+import java.time.LocalDate;
+
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Document {
 	
 	
-	private StringProperty identifiant;
+	private StringProperty numDoc;
 	private StringProperty titre;
 	private IntegerProperty nbPrets;
-	private StringProperty datePublication;
+	private ObjectProperty<LocalDate> datePublication;
 
-	public Document(String identifiant, String titre, int nbPrets, String datePublication) {
-		this.identifiant = new SimpleStringProperty(identifiant);
+	public Document(String numDoc, String titre, int nbPrets, String datePublication) {
+		this.numDoc = new SimpleStringProperty(numDoc);
 		this.titre = new SimpleStringProperty(titre);
 		this.nbPrets = new SimpleIntegerProperty(nbPrets);
-		this.datePublication = new SimpleStringProperty(datePublication);
+		this.datePublication = new SimpleObjectProperty(datePublication);
 	}
 
-	public final StringProperty identifiantProperty() {
-		return this.identifiant;
-	}
-
-
-	public final String getIdentifiant() {
-		return this.identifiantProperty().get();
-	}
-
-
-	public final void setIdentifiant(final String identifiant) {
-		this.identifiantProperty().set(identifiant);
-	}
-
+	
 
 	public final StringProperty titreProperty() {
 		return this.titre;
@@ -64,19 +55,40 @@ public class Document {
 		this.nbPretsProperty().set(nbPrets);
 	}
 
-
-	public final StringProperty datePublicationProperty() {
+	public final ObjectProperty<LocalDate> datePublicationProperty() {
 		return this.datePublication;
 	}
+	
 
-
-	public final String getDatePublication() {
+	public final LocalDate getDatePublication() {
 		return this.datePublicationProperty().get();
 	}
+	
 
-
-	public final void setDatePublication(final String datePublication) {
+	public final void setDatePublication(final LocalDate datePublication) {
 		this.datePublicationProperty().set(datePublication);
 	}
 
+
+
+	public final StringProperty numDocProperty() {
+		return this.numDoc;
+	}
+	
+
+
+
+	public final String getNumDoc() {
+		return this.numDocProperty().get();
+	}
+	
+
+
+
+	public final void setNumDoc(final String numDoc) {
+		this.numDocProperty().set(numDoc);
+	}
+	
 }
+
+
