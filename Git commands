@@ -1,0 +1,20 @@
+COMMANDES GIT
+
+Pour creer et acceder a une nouvelle branche :
+
+$ git checkout -b <nom de la branche>
+
+Pour merge :
+
+//dans la sous branche
+
+$ git push origin <ta branche>
+$ git commit -m <message>
+
+//Dans le master
+
+$ git checkout master
+$ git merge <ta branche>
+$ git add .
+$ git commit -m <message>
+$ git push origin master
