@@ -5,43 +5,45 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import model.Document;
+import model.DVD;
 
-public class DocumentController {
+public class DVDController {
+	
 
 	@FXML
-	private TableView<Document> tableView;
+	private TableView<DVD> tableView;
 	
 	@FXML
-	private TableColumn<Document, String> colNumDoc;
+	private TableColumn<DVD, String> colNumDoc;
 	
 	@FXML
-	private TableColumn<Document, String> colTitre;
+	private TableColumn<DVD, String> colTitre;
 	
 	@FXML
-	private TableColumn<Document, String> colAuteur;
+	private TableColumn<DVD, String> colRealisateur;
 	
 	@FXML
-	private TableColumn<Document, String> colDate;
+	private TableColumn<DVD, String> colDate;
 	
 	@FXML
-	private TableColumn<Document, Boolean> colEtat;
+	private TableColumn<DVD, Boolean> colEtat;
 	
 	@FXML
-	private TableColumn<Document, Integer> colNbPret;
+	private TableColumn<DVD, Integer> colNbPret;
 	
 	@FXML
-	private TableColumn<Document, String> colEmprunteur;
+	private TableColumn<DVD, String> colEmprunteur;
 	
-	private ObservableList<Document> lstObsDoc = FXCollections.observableArrayList();
+	private ObservableList<DVD> lstObsDVD = FXCollections.observableArrayList();
 	
-	public DocumentController () {
+	public DVDController () {
 		
 	}
 	
-	
 	@FXML
-	public void initialize() {
-		tableView.setItems(lstObsDoc);
+	public void initialize () {
+		tableView.setItems(lstObsDVD);
 	}
+	
 }
+
