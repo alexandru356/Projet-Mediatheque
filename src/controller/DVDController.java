@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,7 +25,7 @@ public class DVDController {
 	private TableColumn<DVD, String> colRealisateur;
 	
 	@FXML
-	private TableColumn<DVD, String> colDate;
+	private TableColumn<DVD, LocalDate> colDate;
 	
 	@FXML
 	private TableColumn<DVD, Boolean> colEtat;

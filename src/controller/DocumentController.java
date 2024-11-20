@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +24,7 @@ public class DocumentController {
 	private TableColumn<Document, String> colAuteur;
 	
 	@FXML
-	private TableColumn<Document, String> colDate;
+	private TableColumn<Document, LocalDate> colDate;
 	
 	@FXML
 	private TableColumn<Document, Boolean> colEtat;

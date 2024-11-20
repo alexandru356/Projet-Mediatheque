@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +21,7 @@ public class PeriodiqueController {
 	private TableColumn<Periodique, String> colTitre;
 	
 	@FXML
-	private TableColumn<Periodique, String> colDate;
+	private TableColumn<Periodique, LocalDate> colDate;
 	
 	@FXML
 	private TableColumn<Periodique, Integer> colVol;
