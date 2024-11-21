@@ -8,11 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.Livre;
+import utils.LivreReader;
 
 public class LivreController {
 
 	@FXML
-	private TableView<Livre> tableView;
+	private TableView<Livre> tableViewLivres;
 	
 	@FXML
 	private TableColumn<Livre, String> colNumDoc;
@@ -24,7 +25,7 @@ public class LivreController {
 	private TableColumn<Livre, String> colAuteur;
 	
 	@FXML
-	private TableColumn<Livre, LocalDate> colDate;
+	private TableColumn<Livre, String> colDate;
 	
 	@FXML
 	private TableColumn<Livre, Boolean> colEtat;
@@ -43,5 +44,16 @@ public class LivreController {
 	
 	@FXML
 	public void initialize () {
+		
+		colNumDoc.setCellValueFactory(donnee -> donnee.getValue().numDocProperty());
+		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
+		colAuteur.setCellValueFactory(donnee -> donnee.getValue().auteurProperty());
+		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
+		//colEtat.setCellValueFactory(donnee -> donnee.getValue());
+		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
+		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
+		lstObsLivre = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
+		
+		tableViewLivres.setItems(lstObsLivre);
 	}
 }

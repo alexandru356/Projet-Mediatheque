@@ -1,6 +1,6 @@
 package controller;
 
-import java.time.LocalDate;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,11 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.Periodique;
+import utils.PeriodiqueReader;
 
 public class PeriodiqueController {
 
 	@FXML
-	private TableView<Periodique> tableView;
+	private TableView<Periodique> tableViewPeriodique;
 	
 	@FXML
 	private TableColumn<Periodique, String> colNumDoc;
@@ -21,13 +22,13 @@ public class PeriodiqueController {
 	private TableColumn<Periodique, String> colTitre;
 	
 	@FXML
-	private TableColumn<Periodique, LocalDate> colDate;
+	private TableColumn<Periodique, String> colDate;
 	
 	@FXML
-	private TableColumn<Periodique, Integer> colVol;
+	private TableColumn<Periodique, String> colVol;
 	
 	@FXML
-	private TableColumn<Periodique, Integer> colNumPeriodique;
+	private TableColumn<Periodique, String> colNumPeriodique;
 	
 	@FXML
 	private TableColumn<Periodique, Boolean> colEtat;
@@ -46,5 +47,16 @@ public class PeriodiqueController {
 	
 	@FXML
 	public void initialize () {
+		colNumDoc.setCellValueFactory(donnee -> donnee.getValue().numDocProperty());
+		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
+		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
+		colVol.setCellValueFactory(donnee -> donnee.getValue().numVolumeProperty());
+		colNumPeriodique.setCellValueFactory(donnee -> donnee.getValue().numPeriodiqueProperty());
+		//colEtat.setCellValueFactory(donnee -> donnee.getValue());
+		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
+		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
+		lstObsPeriodique = FXCollections.observableArrayList(PeriodiqueReader.chargerFichier("Periodiques.txt"));
+		
+		tableViewPeriodique.setItems(lstObsPeriodique);
 	}
 }

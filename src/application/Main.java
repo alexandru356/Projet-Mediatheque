@@ -17,7 +17,7 @@ public class Main extends Application {
 	    Parent root = loader.load();
 	    Scene scene = new Scene(root);
 	    primaryStage.setScene(scene);
-	    primaryStage.setTitle("Mediatheque");
+	    primaryStage.setTitle("Médiathèque");
 	    primaryStage.show();
 	}
 	
