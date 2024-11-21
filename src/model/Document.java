@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -53,20 +54,19 @@ public class Document {
 		this.nbPretsProperty().set(nbPrets);
 	}
 
-	public final ObjectProperty<LocalDate> datePublicationProperty() {
-		return this.datePublication;
+	public final StringProperty datePublicationFormattedProperty() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		return new SimpleStringProperty(getDatePublication().format(formatter));
 	}
 	
 
 	public final LocalDate getDatePublication() {
-		return this.datePublicationProperty().get();
+	    return this.datePublication.get();
 	}
-	
 
 	public final void setDatePublication(final LocalDate datePublication) {
-		this.datePublicationProperty().set(datePublication);
+	    this.datePublication.set(datePublication);
 	}
-
 
 
 	public final StringProperty numDocProperty() {
