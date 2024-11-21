@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="819.0" prefWidth="1704.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="819.0" prefWidth="1704.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueController">
    <children>
       <TabPane layoutY="100.0" prefHeight="499.0" prefWidth="1250.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -56,18 +56,18 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <RadioButton layoutX="163.0" layoutY="34.0" mnemonicParsing="false" text="auteur/réalisateur">
+      <RadioButton fx:id="rdAuteur" layoutX="163.0" layoutY="34.0" mnemonicParsing="false" text="auteur/réalisateur">
          <font>
             <Font size="18.0" />
          </font>
       </RadioButton>
-      <RadioButton layoutX="366.0" layoutY="33.0" mnemonicParsing="false" text="mots clés">
+      <RadioButton fx:id="rdMotCle" layoutX="366.0" layoutY="33.0" mnemonicParsing="false" text="mots clés">
          <font>
             <Font size="18.0" />
          </font>
       </RadioButton>
-      <TextField layoutX="524.0" layoutY="34.0" prefHeight="26.0" prefWidth="240.0" />
-      <Button layoutX="811.0" layoutY="29.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="240.0" text="Effacer">
+      <TextField fx:id="tfRecherche" layoutX="524.0" layoutY="34.0" prefHeight="26.0" prefWidth="240.0" />
+      <Button fx:id="btnEffacer" layoutX="811.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#Effacer" prefHeight="26.0" prefWidth="240.0" text="Effacer">
          <font>
             <Font size="18.0" />
          </font>
@@ -149,7 +149,7 @@
             </Button>
          </children>
       </GridPane>
-      <Button layoutX="1403.0" layoutY="321.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="170.0" text="Quitter">
+      <Button fx:id="btnQuitter" layoutX="1403.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#Quitter" prefHeight="58.0" prefWidth="170.0" text="Quitter">
          <font>
             <Font size="18.0" />
          </font>
