@@ -1,6 +1,10 @@
 package model;
 
 
+
+
+import java.time.LocalDate;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -9,9 +13,9 @@ public class Livre extends Document{
 
     private StringProperty auteur;
 
-    public Livre(String numDoc, String titre, String datePublication, String auteur) {
+    public Livre(String numDoc, String titre, LocalDate datePublication, String auteur) {
         // Appel au constructeur parent de Document
-        super(numDoc, titre, 0, datePublication); 
+        super(numDoc, titre, 0, datePublication.toString()); 
         this.auteur = new SimpleStringProperty(auteur);
     }
 
