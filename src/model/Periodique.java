@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,15 +11,15 @@ public class Periodique extends Document{
 
 
 
-	private IntegerProperty numVolume;
-	private IntegerProperty numPeriodique;
+	private StringProperty numVolume;
+	private StringProperty numPeriodique;
 	private StringProperty auteur;
 
 
-	public Periodique(String numDoc, String titre, String datePublication, int numVolume, int numPeriodique, String auteur) {
-		super(numDoc,titre,0,datePublication);
-		this.numVolume = new SimpleIntegerProperty(numVolume);
-		this.numPeriodique = new SimpleIntegerProperty(numPeriodique);
+	public Periodique(String numDoc, String titre, LocalDate datePublication, String numVolume, String numPeriodique, String auteur) {
+		super(numDoc,titre,0,datePublication.toString());
+		this.numVolume = new SimpleStringProperty(numVolume);
+		this.numPeriodique = new SimpleStringProperty(numPeriodique);
 		this.auteur = new SimpleStringProperty(auteur);
 	}
 
@@ -26,47 +28,47 @@ public class Periodique extends Document{
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		return sb.append("Livre: \n")
+		return sb.append("Periodique: \n")
                 .append("Numéro de document: ").append(getNumDoc()).append("\n")
                 .append("Titre: ").append(getTitre()).append("\n")
                 .append("Date de publication: ").append(getDatePublication()).append("\n")
-                .append("Auteur: ").append(getAuteur())
-				.append("Numéro du Volume: ").append(getNumVolume())
+                .append("Auteur: ").append(getAuteur()).append("\n")
+				.append("Numéro du Volume: ").append(getNumVolume()).append("\n")
 				.append("Numéro Périodique: ").append(getNumPeriodique()).toString();
 	}
 
 
-	public final IntegerProperty numVolumeProperty() {
+	public final StringProperty numVolumeProperty() {
 		return this.numVolume;
 	}
 	
 
 
-	public final int getNumVolume() {
+	public final String getNumVolume() {
 		return this.numVolumeProperty().get();
 	}
 	
 
 
-	public final void setNumVolume(final int numVolume) {
+	public final void setNumVolume(final String numVolume) {
 		this.numVolumeProperty().set(numVolume);
 	}
 	
 
 
-	public final IntegerProperty numPeriodiqueProperty() {
+	public final StringProperty numPeriodiqueProperty() {
 		return this.numPeriodique;
 	}
 	
 
 
-	public final int getNumPeriodique() {
+	public final String getNumPeriodique() {
 		return this.numPeriodiqueProperty().get();
 	}
 	
 
 
-	public final void setNumPeriodique(final int numPeriodique) {
+	public final void setNumPeriodique(final String numPeriodique) {
 		this.numPeriodiqueProperty().set(numPeriodique);
 	}
 	
@@ -89,6 +91,8 @@ public class Periodique extends Document{
 	}
 	
 
+
+	
 
 
 }
