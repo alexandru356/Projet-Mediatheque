@@ -2,112 +2,63 @@ package model;
 
 import java.time.LocalDate;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class DVD {
+public class DVD extends Document{
 
-	private StringProperty numDoc;
-	private StringProperty titre;
-	private ObjectProperty<LocalDate> datePublication;
-	private StringProperty auteur;
+	private StringProperty realisateur;
+	private IntegerProperty  nbDisques;
 
-
-	public DVD(String numDoc, String titre, String datePublication, String auteur) {
-		this.numDoc = new SimpleStringProperty(numDoc);
-		this.titre = new SimpleStringProperty(titre);
-		this.datePublication = new SimpleObjectProperty(datePublication);
-		this.auteur = new SimpleStringProperty(auteur);
+	// Constructeur
+	public DVD(String numDoc, String titre, int nbPrets, LocalDate datePublication, String realisateur, int nbDisques) {
+		super(numDoc, titre, nbPrets, datePublication.toString());  
+		this.realisateur = new SimpleStringProperty(realisateur);
+		this.nbDisques = new SimpleIntegerProperty(nbDisques);
 	}
-
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-
-		return sb.append("Livre: \n")
-				.append("ID: " + numDoc + "\n")
-				.append("Titre: " + titre + "\n")
-				.append("Date de publication: " + datePublication + "\n")
-				.append("Auteur: " + auteur).toString();
+		
+		sb.append("DVD: \n")
+	      .append("Numéro de document: ").append(getNumDoc()).append("\n")
+	      .append("Titre: ").append(getTitre()).append("\n")
+	      .append("Date de publication: ").append(getDatePublication()).append("\n")
+	      .append("Réalisateur: ").append(getRealisateur()).append("\n")
+	      .append("Nombre de disques: ").append(getNbDisques());
+	    return sb.toString();
+	}
+		
+	public final StringProperty realisateurProperty() {
+		return this.realisateur;
 	}
 
 
-	public final StringProperty titreProperty() {
-		return this.titre;
+	public final String getRealisateur() {
+		return this.realisateurProperty().get();
 	}
 
 
-
-
-	public final String getTitre() {
-		return this.titreProperty().get();
+	public final void setRealisateur(final String realisateur) {
+		this.realisateurProperty().set(realisateur);
 	}
 
 
-
-
-	public final void setTitre(final String titre) {
-		this.titreProperty().set(titre);
-	}
-
-	public final StringProperty auteurProperty() {
-		return this.auteur;
-	}
-
-	public final String getAuteur() {
-		return this.auteurProperty().get();
+	public final IntegerProperty nbDisquesProperty() {
+		return this.nbDisques;
 	}
 
 
-
-
-	public final void setAuteur(final String auteur) {
-		this.auteurProperty().set(auteur);
+	public final int getNbDisques() {
+		return this.nbDisquesProperty().get();
 	}
 
 
-
-	public final ObjectProperty<LocalDate> datePublicationProperty() {
-		return this.datePublication;
+	public final void setNbDisques(final int nbDisques) {
+		this.nbDisquesProperty().set(nbDisques);
 	}
-	
-
-
-
-	public final LocalDate getDatePublication() {
-		return this.datePublicationProperty().get();
-	}
-	
-
-
-
-	public final void setDatePublication(final LocalDate datePublication) {
-		this.datePublicationProperty().set(datePublication);
-	}
-
-
-
-	public final StringProperty numDocProperty() {
-		return this.numDoc;
-	}
-	
-
-
-
-	public final String getNumDoc() {
-		return this.numDocProperty().get();
-	}
-	
-
-
-
-	public final void setNumDoc(final String numDoc) {
-		this.numDocProperty().set(numDoc);
-	}
-	
-	
 
 }

@@ -7,14 +7,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Adherent {
+public class Adherent extends Personne{
 
 
 	private IntegerProperty numInscription;
-	private StringProperty numTelephone;
-	private StringProperty nom;
-	private StringProperty prenom;
-	private StringProperty adresse;
 	private DoubleProperty amende;
 
 	//Constantes pour les limites de l'adhérent
@@ -24,14 +20,22 @@ public class Adherent {
 	private static final double AMENDE_PAR_JOUR = 0.50; 
 
 	public Adherent(int numInscription, String numTelephone, String nom, String prenom, String adresse) {
+		super(nom,prenom,numTelephone,adresse);
 		this.numInscription = new SimpleIntegerProperty(numInscription);
-		this.numTelephone = new SimpleStringProperty(numTelephone);
-		this.nom = new SimpleStringProperty(nom);
-		this.prenom = new SimpleStringProperty(prenom);
-		this.adresse = new SimpleStringProperty(adresse);
 		this.amende = new SimpleDoubleProperty(0.0);
 	}
 
+	
+	@Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(super.toString()).append("\n");
+	    sb.append("Numéro d'inscription : ").append(getNumInscription()).append("\n");
+	    sb.append("Amende : $").append(String.format("%.2f", getAmende())).append("\n");
+
+	    return sb.toString();
+	}
+	
 	public final IntegerProperty numInscriptionProperty() {
 		return this.numInscription;
 	}
@@ -45,67 +49,6 @@ public class Adherent {
 	public final void setNumInscription(final int numInscription) {
 		this.numInscriptionProperty().set(numInscription);
 	}
-
-
-	public final StringProperty numTelephoneProperty() {
-		return this.numTelephone;
-	}
-
-
-	public final String getNumTelephone() {
-		return this.numTelephoneProperty().get();
-	}
-
-
-	public final void setNumTelephone(final String numTelephone) {
-		this.numTelephoneProperty().set(numTelephone);
-	}
-
-
-	public final StringProperty nomProperty() {
-		return this.nom;
-	}
-
-
-	public final String getNom() {
-		return this.nomProperty().get();
-	}
-
-
-	public final void setNom(final String nom) {
-		this.nomProperty().set(nom);
-	}
-
-
-	public final StringProperty prenomProperty() {
-		return this.prenom;
-	}
-
-
-	public final String getPrenom() {
-		return this.prenomProperty().get();
-	}
-
-
-	public final void setPrenom(final String prenom) {
-		this.prenomProperty().set(prenom);
-	}
-
-
-	public final StringProperty adresseProperty() {
-		return this.adresse;
-	}
-
-
-	public final String getAdresse() {
-		return this.adresseProperty().get();
-	}
-
-
-	public final void setAdresse(final String adresse) {
-		this.adresseProperty().set(adresse);
-	}
-
 
 	public final DoubleProperty amendeProperty() {
 		return this.amende;
