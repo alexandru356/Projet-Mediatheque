@@ -21,10 +21,8 @@ public class Document {
 		this.numDoc = new SimpleStringProperty(numDoc);
 		this.titre = new SimpleStringProperty(titre);
 		this.nbPrets = new SimpleIntegerProperty(nbPrets);
-		this.datePublication = new SimpleObjectProperty(datePublication);
+		this.datePublication = new SimpleObjectProperty<>(LocalDate.parse(datePublication));
 	}
-
-	
 
 	public final StringProperty titreProperty() {
 		return this.titre;

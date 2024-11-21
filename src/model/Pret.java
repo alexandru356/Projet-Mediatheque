@@ -23,13 +23,13 @@ public class Pret {
 	}
 
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Adhérent: " + adherent.getNom() + " " + adherent.getPrenom() + 
 				"\nDocument: " + document.getTitre() +
 				"\nDate de prêt: " + datePret.get() + 
 				"\nDate de retour: " + dateRetour.get();
-	}
+	}*/
 
 
 	public final ObjectProperty<LocalDate> datePretProperty() {
