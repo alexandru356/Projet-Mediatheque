@@ -10,13 +10,13 @@ import javafx.beans.property.StringProperty;
 public class DVD extends Document{
 
 	private StringProperty realisateur;
-	private IntegerProperty  nbDisques;
+	private StringProperty  nbDisques;
 
 	// Constructeur
-	public DVD(String numDoc, String titre, int nbPrets, LocalDate datePublication, String realisateur, int nbDisques) {
-		super(numDoc, titre, nbPrets, datePublication.toString());  
+	public DVD(String numDoc, String titre, LocalDate datePublication,String nbDisques ,String realisateur) {
+		super(numDoc, titre, 0, datePublication.toString());  
 		this.realisateur = new SimpleStringProperty(realisateur);
-		this.nbDisques = new SimpleIntegerProperty(nbDisques);
+		this.nbDisques = new SimpleStringProperty(nbDisques);
 	}
 
 	@Override
@@ -46,19 +46,21 @@ public class DVD extends Document{
 		this.realisateurProperty().set(realisateur);
 	}
 
-
-	public final IntegerProperty nbDisquesProperty() {
+	public final StringProperty nbDisquesProperty() {
 		return this.nbDisques;
 	}
+	
 
-
-	public final int getNbDisques() {
+	public final String getNbDisques() {
 		return this.nbDisquesProperty().get();
 	}
+	
 
-
-	public final void setNbDisques(final int nbDisques) {
+	public final void setNbDisques(final String nbDisques) {
 		this.nbDisquesProperty().set(nbDisques);
 	}
+	
 
+
+	
 }
