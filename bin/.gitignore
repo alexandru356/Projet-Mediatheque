@@ -1,2 +1,9 @@
+/application/
+/controller/
+/css/
+/donnees/
+/fxml/
+/images/
 /model/
 /utils/
+/module-info.class

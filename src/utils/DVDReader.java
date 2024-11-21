@@ -36,12 +36,14 @@ public class DVDReader {
 				String numDoc = lecteur.next().trim();
 				String titre = lecteur.next().trim();
 				String datePublicationStr = lecteur.next().trim();
+				String nbDisques = lecteur.next().trim();
 				String realisateur = lecteur.next().trim();
 				
 				LocalDate datePublication = LocalDate.parse(datePublicationStr, formatter);
 				
-				//DVD dvd = new DVD(numDoc,titre,datePublication,realisateur);
+				DVD dvd = new DVD(numDoc,titre,datePublication,nbDisques,realisateur);
 				
+				listeDVD.add(dvd);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
