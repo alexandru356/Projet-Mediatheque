@@ -51,7 +51,8 @@ public class DVDController {
 		colRealisateur.setCellValueFactory(donnee -> donnee.getValue().realisateurProperty());
 		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
-		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
+		colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nomEmprunteurProperty());
+		
 		tableViewDvd.setItems(lstObsDVD);
 	}
 	

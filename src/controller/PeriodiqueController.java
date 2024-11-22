@@ -54,7 +54,7 @@ public class PeriodiqueController {
 		colNumPeriodique.setCellValueFactory(donnee -> donnee.getValue().numPeriodiqueProperty());
 		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
-		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
+		colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nomEmprunteurProperty());
 
 		tableViewPeriodique.setItems(lstObsPeriodique);
 	}

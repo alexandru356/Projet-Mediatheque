@@ -7,6 +7,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 import model.Document;
 
 public class CatalogueController {
@@ -26,9 +27,34 @@ public class CatalogueController {
 	@FXML
 	private TextField tfRecherche;
 	
+	//Nodes pour l'identification :
 	
 	@FXML
-	private TableView<Document> tableDocuments;
+	private RadioButton rdIdentificationNom;
+	
+	@FXML
+	private RadioButton rdIdentificationTelephone;
+	
+	@FXML
+	private Button btnConsulter;
+	
+	@FXML
+	private TextField tfNom;
+	
+	@FXML
+	private TextField tfPrenom;
+	
+	@FXML
+	private TextField tfTelephone;
+	
+	@FXML
+	private Text txtNom;
+	
+	@FXML
+	private Text txtPrenom;
+	
+	@FXML
+	private Text txtTelephone;
 	
 	public void Quitter () {
 		Platform.exit();
@@ -36,6 +62,24 @@ public class CatalogueController {
 	
 	public void Effacer () {
 		tfRecherche.clear();
+	}
+	
+	public void TypeIdentigication () {
+		if (rdIdentificationTelephone.isSelected()) {
+			tfNom.setVisible(false);
+			tfPrenom.setVisible(false);
+			tfTelephone.setVisible(true);
+			txtTelephone.setVisible(true);
+			txtNom.setVisible(false);
+			txtPrenom.setVisible(false);
+		}else {
+			tfNom.setVisible(true);
+			tfPrenom.setVisible(true);
+			tfTelephone.setVisible(false);
+			txtTelephone.setVisible(false);
+			txtNom.setVisible(true);
+			txtPrenom.setVisible(true);
+		}
 	}
 	
 	public CatalogueController () {
@@ -46,11 +90,18 @@ public class CatalogueController {
 	@FXML
 	public void initialize () {
 		
-		ToggleGroup group = new ToggleGroup();
-		rdAuteur.setToggleGroup(group);
-		rdMotCle.setToggleGroup(group);
+		ToggleGroup group1 = new ToggleGroup();
+		rdAuteur.setToggleGroup(group1);
+		rdMotCle.setToggleGroup(group1);
 		
 		rdAuteur.setSelected(true);
 		
+		//Pour choisir la methode d'identification
+		
+		ToggleGroup groupIdentification = new ToggleGroup();
+		rdIdentificationNom.setToggleGroup(groupIdentification);
+		rdIdentificationTelephone.setToggleGroup(groupIdentification);
+		
+		rdIdentificationNom.setSelected(true);
 	}
 }
