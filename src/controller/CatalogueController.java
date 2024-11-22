@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 public class CatalogueController {
 
@@ -39,5 +40,10 @@ public class CatalogueController {
 	@FXML
 	public void initialize () {
 		
+		ToggleGroup group = new ToggleGroup();
+		rdAuteur.setToggleGroup(group);
+		rdMotCle.setToggleGroup(group);
+		
+		rdAuteur.setSelected(true);
 	}
 }
