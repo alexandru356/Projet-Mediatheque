@@ -3,7 +3,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView layoutY="-2.0" prefHeight="472.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DocumentController">
+<TableView fx:id="tableViewDocs" layoutY="-2.0" prefHeight="689.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DocumentController">
 	<columns>
 		<TableColumn fx:id="colNumDoc" prefWidth="147.7333948612213" text="Numéro du document" />
 		<TableColumn fx:id="colTitre" minWidth="2.6666336059570312" prefWidth="248.0" text="Titre" />

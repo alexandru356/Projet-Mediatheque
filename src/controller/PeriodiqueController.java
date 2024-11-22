@@ -31,7 +31,7 @@ public class PeriodiqueController {
 	private TableColumn<Periodique, String> colNumPeriodique;
 	
 	@FXML
-	private TableColumn<Periodique, Boolean> colEtat;
+	private TableColumn<Periodique, String> colEtat;
 	
 	@FXML
 	private TableColumn<Periodique, Integer> colNbPret;
@@ -52,7 +52,7 @@ public class PeriodiqueController {
 		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
 		colVol.setCellValueFactory(donnee -> donnee.getValue().numVolumeProperty());
 		colNumPeriodique.setCellValueFactory(donnee -> donnee.getValue().numPeriodiqueProperty());
-		//colEtat.setCellValueFactory(donnee -> donnee.getValue());
+		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
 		lstObsPeriodique = FXCollections.observableArrayList(PeriodiqueReader.chargerFichier("Periodiques.txt"));

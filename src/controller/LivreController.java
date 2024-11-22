@@ -1,7 +1,5 @@
 package controller;
 
-import java.time.LocalDate;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,7 +26,7 @@ public class LivreController {
 	private TableColumn<Livre, String> colDate;
 	
 	@FXML
-	private TableColumn<Livre, Boolean> colEtat;
+	private TableColumn<Livre, String> colEtat;
 	
 	@FXML
 	private TableColumn<Livre, Integer> colNbPret;
@@ -49,7 +47,7 @@ public class LivreController {
 		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
 		colAuteur.setCellValueFactory(donnee -> donnee.getValue().auteurProperty());
 		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
-		//colEtat.setCellValueFactory(donnee -> donnee.getValue());
+		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
 		lstObsLivre = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
