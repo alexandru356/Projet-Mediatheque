@@ -51,5 +51,6 @@ public class CatalogueController {
 		rdMotCle.setToggleGroup(group);
 		
 		rdAuteur.setSelected(true);
+		
 	}
 }

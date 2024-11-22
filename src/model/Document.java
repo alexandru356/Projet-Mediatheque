@@ -20,6 +20,7 @@ public class Document {
 	private IntegerProperty nbPrets;
 	private ObjectProperty<LocalDate> datePublication;
 	private BooleanProperty estEmprunte;
+	private StringProperty nomEmprunteur;
 
 	public Document(String numDoc, String titre, int nbPrets, String datePublication) {
 		this.numDoc = new SimpleStringProperty(numDoc);
@@ -27,6 +28,7 @@ public class Document {
 		this.nbPrets = new SimpleIntegerProperty(nbPrets);
 		this.datePublication = new SimpleObjectProperty<>(LocalDate.parse(datePublication));
 		this.estEmprunte = new SimpleBooleanProperty(false);
+		this.nomEmprunteur = new SimpleStringProperty("Andrei");
 	}
 
 	public BooleanProperty estEmprunteProperty() {
@@ -106,6 +108,21 @@ public class Document {
 	public final void setNumDoc(final String numDoc) {
 		this.numDocProperty().set(numDoc);
 	}
+
+	public final StringProperty nomEmprunteurProperty() {
+		return this.nomEmprunteur;
+	}
+	
+
+	public final String getNomEmprunteur() {
+		return this.nomEmprunteurProperty().get();
+	}
+	
+
+	public final void setNomEmprunteur(final String nomEmprunteur) {
+		this.nomEmprunteurProperty().set(nomEmprunteur);
+	}
+	
 
 }
 
