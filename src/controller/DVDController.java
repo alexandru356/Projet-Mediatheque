@@ -29,7 +29,7 @@ public class DVDController {
 	private TableColumn<DVD, String> colDate;
 	
 	@FXML
-	private TableColumn<DVD, Boolean> colEtat;
+	private TableColumn<DVD, String> colEtat;
 	
 	@FXML
 	private TableColumn<DVD, Integer> colNbPret;
@@ -49,7 +49,7 @@ public class DVDController {
 		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
 		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
 		colRealisateur.setCellValueFactory(donnee -> donnee.getValue().realisateurProperty());
-		//colEtat.setCellValueFactory(donnee -> donnee.getValue());
+		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
 		tableViewDvd.setItems(lstObsDVD);
