@@ -43,25 +43,34 @@ public class DocumentController {
 	private ObservableList<Document> lstObsDoc = FXCollections.observableArrayList();
 	
 	public DocumentController () {
-		
-	}
-	
-	
-	@FXML
-	public void initialize() {
-		colNumDoc.setCellValueFactory(donnee -> donnee.getValue().numDocProperty());
-		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
-		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
-		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
-		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
-		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		ObservableList<DVD> listeDVDs = FXCollections.observableArrayList(DVDReader.chargerFichier("DVD.txt"));
 	    ObservableList<Livre> listeLivres = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
 	    ObservableList<Periodique> listePeriodiques = FXCollections.observableArrayList(PeriodiqueReader.chargerFichier("Periodiques.txt"));
 	    lstObsDoc.addAll(listeDVDs);
 	    lstObsDoc.addAll(listeLivres);
 	    lstObsDoc.addAll(listePeriodiques);
-	    
-	    tableViewDocs.setItems(lstObsDoc);
+	}
+	
+	@FXML
+	public void initialize() {
+		tableViewDocs.setItems(lstObsDoc);
+		
+		colNumDoc.setCellValueFactory(donnee -> donnee.getValue().numDocProperty());
+		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
+		colAuteur.setCellValueFactory(donnee -> {
+			Document doc = donnee.getValue();
+			
+			 if (doc instanceof Livre) {
+				 return ((Livre) doc).auteurProperty();
+			 }else if(doc instanceof DVD) {
+				 return ((DVD) doc).realisateurProperty();
+			 }else {
+				 return null;
+			 }
+		});
+		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
+		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
+		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
+		colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nomEmprunteurProperty());
 	}
 }
