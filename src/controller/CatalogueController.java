@@ -4,8 +4,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import model.Document;
 
 public class CatalogueController {
 
@@ -23,6 +25,10 @@ public class CatalogueController {
 	
 	@FXML
 	private TextField tfRecherche;
+	
+	
+	@FXML
+	private TableView<Document> tableDocuments;
 	
 	public void Quitter () {
 		Platform.exit();
