@@ -1,8 +1,6 @@
 package utils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -12,7 +10,6 @@ import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.DVD;
-import model.Livre;
 
 public class DVDReader {
 

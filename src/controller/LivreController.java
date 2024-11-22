@@ -34,7 +34,7 @@ public class LivreController {
 	@FXML
 	private TableColumn<Livre, String> colEmprunteur;
 	
-	private ObservableList<Livre> lstObsLivre = FXCollections.observableArrayList();
+	private ObservableList<Livre> lstObsLivre = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
 	
 	public LivreController () {
 		
@@ -50,7 +50,6 @@ public class LivreController {
 		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
-		lstObsLivre = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
 		
 		tableViewLivres.setItems(lstObsLivre);
 	}

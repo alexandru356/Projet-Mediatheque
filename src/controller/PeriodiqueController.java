@@ -39,7 +39,7 @@ public class PeriodiqueController {
 	@FXML
 	private TableColumn<Periodique, String> colEmprunteur;
 	
-	private ObservableList<Periodique> lstObsPeriodique = FXCollections.observableArrayList();
+	private ObservableList<Periodique> lstObsPeriodique = FXCollections.observableArrayList(PeriodiqueReader.chargerFichier("Periodiques.txt"));
 	
 	public PeriodiqueController () {
 		
@@ -55,8 +55,7 @@ public class PeriodiqueController {
 		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
-		lstObsPeriodique = FXCollections.observableArrayList(PeriodiqueReader.chargerFichier("Periodiques.txt"));
-		
+
 		tableViewPeriodique.setItems(lstObsPeriodique);
 	}
 }
