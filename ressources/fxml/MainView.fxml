@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="868.0" prefWidth="1704.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="868.0" prefWidth="1704.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueController">
    <children>
       <TabPane layoutY="100.0" prefHeight="732.0" prefWidth="1250.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -72,7 +72,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <GridPane layoutX="1295.0" layoutY="29.0" prefHeight="262.0" prefWidth="386.0" style="-fx-border-color: black;">
+      <GridPane fx:id="gridIdentifiant" layoutX="1295.0" layoutY="29.0" prefHeight="262.0" prefWidth="386.0" style="-fx-border-color: black;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.800048828125" minWidth="0.0" prefWidth="7.6000732421874915" />
@@ -94,7 +94,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Text>
-            <RadioButton mnemonicParsing="false" text="nom et prénom" GridPane.columnIndex="2">
+            <RadioButton fx:id="rdIdentificationNom" mnemonicParsing="false" onAction="#TypeIdentigication" text="nom et prénom" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets bottom="45.0" />
                </GridPane.margin>
@@ -105,7 +105,7 @@
                   <Insets left="70.0" top="10.0" />
                </padding>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="33.0" prefWidth="234.0" text="téléphone" GridPane.columnIndex="2">
+            <RadioButton fx:id="rdIdentificationTelephone" mnemonicParsing="false" onAction="#TypeIdentigication" prefHeight="33.0" prefWidth="234.0" text="téléphone" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets top="35.0" />
                </GridPane.margin>
@@ -116,7 +116,7 @@
                   <Insets left="70.0" />
                </padding>
             </RadioButton>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" wrappingWidth="89.33678817749023" GridPane.rowIndex="1">
+            <Text fx:id="txtNom" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" wrappingWidth="89.33678817749023" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
@@ -124,7 +124,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom :" wrappingWidth="89.33678817749023" GridPane.rowIndex="1">
+            <Text fx:id="txtPrenom" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom :" wrappingWidth="89.33678817749023" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
@@ -132,21 +132,37 @@
                   <Insets left="10.0" top="70.0" />
                </GridPane.margin>
             </Text>
-            <TextField prefHeight="26.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <TextField fx:id="tfNom" prefHeight="26.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <TextField fx:id="tfPrenom" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" top="70.0" />
                </GridPane.margin>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" text="Consulter mon dossier" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button fx:id="btnConsulter" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" text="Consulter mon dossier" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
+            <TextField fx:id="tfTelephone" prefHeight="26.0" prefWidth="227.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text fx:id="txtTelephone" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone :" visible="false" wrappingWidth="97.33678817749023" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Text>
          </children>
       </GridPane>
       <Button fx:id="btnQuitter" layoutX="1403.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#Quitter" prefHeight="58.0" prefWidth="170.0" text="Quitter">

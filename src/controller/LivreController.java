@@ -49,7 +49,7 @@ public class LivreController {
 		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
 		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
-		//colEmprunteur.setCellValueFactory(donnee -> donnee.getValue());
+		colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nomEmprunteurProperty());
 		
 		tableViewLivres.setItems(lstObsLivre);
 	}
