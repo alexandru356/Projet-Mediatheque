@@ -28,7 +28,7 @@ public class Document {
 		this.nbPrets = new SimpleIntegerProperty(nbPrets);
 		this.datePublication = new SimpleObjectProperty<>(LocalDate.parse(datePublication));
 		this.estEmprunte = new SimpleBooleanProperty(false);
-		this.nomEmprunteur = new SimpleStringProperty("Andrei");
+		this.nomEmprunteur = new SimpleStringProperty("testEmprunteur");
 	}
 
 	public BooleanProperty estEmprunteProperty() {
