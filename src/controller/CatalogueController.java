@@ -1,9 +1,14 @@
 package controller;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -56,6 +61,27 @@ public class CatalogueController {
 	@FXML
 	private Text txtTelephone;
 	
+	@FXML
+	private Tab tabTousLesDocuments;
+	
+	@FXML
+	private Tab tabLivres;
+
+	@FXML
+	private Tab tabDVD;
+
+	@FXML
+	private Tab tabPeriodiques;
+	
+	@FXML
+	private TableView<Document> tableDocuments;
+	
+	private DocumentController docController;
+	private LivreController livreController;
+	private DVDController dvdController;
+	private PeriodiqueController periodiqueController;
+
+	
 	public void Quitter () {
 		Platform.exit();
 	}
@@ -88,7 +114,7 @@ public class CatalogueController {
 	
 	
 	@FXML
-	public void initialize () {
+	public void initialize () throws IOException {
 		
 		ToggleGroup group1 = new ToggleGroup();
 		rdAuteur.setToggleGroup(group1);
@@ -103,5 +129,39 @@ public class CatalogueController {
 		rdIdentificationTelephone.setToggleGroup(groupIdentification);
 		
 		rdIdentificationNom.setSelected(true);
+		
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VueDoc.fxml"));
+		Parent root = loader.load();
+		docController = loader.getController();
+		tabTousLesDocuments.setContent(root);  
+
+		loader = new FXMLLoader(getClass().getResource("/fxml/VueLivres.fxml"));
+		root = loader.load();
+		livreController = loader.getController();
+		tabLivres.setContent(root);
+
+		loader = new FXMLLoader(getClass().getResource("/fxml/VueDVD.fxml"));
+		root = loader.load();
+		dvdController = loader.getController();
+		tabDVD.setContent(root);
+
+		loader = new FXMLLoader(getClass().getResource("/fxml/VuePeriodiques.fxml"));
+		root = loader.load();
+		periodiqueController = loader.getController();
+		tabPeriodiques.setContent(root);
+
+		tfRecherche.textProperty().addListener((observable, oldText, newText) -> {
+			rechercherDansTousLesTabs(newText);
+		});
+
 	}
+	
+	public void rechercherDansTousLesTabs(String texte) {
+		docController.filtrerDocuments(texte);
+		livreController.filtrerDocuments(texte);
+		dvdController.filtrerDocuments(texte);
+		periodiqueController.filtrerDocuments(texte);
+	}
+
 }
