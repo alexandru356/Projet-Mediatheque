@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="tableViewDocs" layoutY="-2.0" prefHeight="689.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DocumentController">
+	<columns>
+		<TableColumn fx:id="colNumDoc" prefWidth="147.7333948612213" text="Numéro du document" />
+		<TableColumn fx:id="colTitre" minWidth="2.6666336059570312" prefWidth="248.0" text="Titre" />
+		<TableColumn fx:id="colAuteur" minWidth="2.6666336059570312" prefWidth="160.0" text="Auteur/Réalisateur" />
+		<TableColumn fx:id="colDate" minWidth="2.6666336059570312" prefWidth="170.0" text="Date de parution" />
+		<TableColumn fx:id="colEtat" minWidth="2.6666336059570312" prefWidth="149.0" text="État" />
+		<TableColumn fx:id="colNbPret" minWidth="2.6666336059570312" prefWidth="162.0" text="Nb. prêts" />
+		<TableColumn fx:id="colEmprunteur" minWidth="2.6666336059570312" prefWidth="212.0" text="Emprunteur" />
+	</columns>
+</TableView>
