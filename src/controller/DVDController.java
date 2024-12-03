@@ -56,13 +56,15 @@ public class DVDController {
 		tableViewDvd.setItems(lstObsDVD);
 	}
 	
-	 public void filtrerDocuments(String texte) {
+	 public void filtrerDocuments(String texte, String filtreActif) {
 	        ObservableList<DVD> dvdFiltres = FXCollections.observableArrayList();
 
 	   
 	        for (DVD dvdItem : lstObsDVD) {
-	            if (dvdItem.getTitre().toLowerCase().contains(texte.toLowerCase()) || dvdItem.getRealisateur().toLowerCase().contains(texte.toLowerCase())) {
-	                dvdFiltres.add(dvdItem);
+	        	if ("auteur".equals(filtreActif) && dvdItem.getRealisateur().toLowerCase().contains(texte.toLowerCase())) {
+	        		dvdFiltres.add(dvdItem);
+	            } else if ("motCle".equals(filtreActif) && dvdItem.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+	            	dvdFiltres.add(dvdItem);
 	            }
 	        }
 

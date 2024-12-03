@@ -1,4 +1,5 @@
-/model/
-/fxml/
 /controller/
+/model/
 /utils/
+/donnees/
+/fxml/

@@ -34,10 +34,11 @@ public class PeriodiqueReader {
 				String numVolume = lecteur.next().trim();
 				String numPeriodique = lecteur.next().trim();
 				String auteur = "";
+				String motsCles = lecteur.next().trim();
 
 				LocalDate datePublication = LocalDate.parse(datePublicationStr, formatter);
 
-				Periodique periodique = new Periodique(numDoc,titre,datePublication,numVolume,numPeriodique,auteur);
+				Periodique periodique = new Periodique(numDoc,titre,datePublication,numVolume,numPeriodique,auteur,motsCles);
 
 				listePeriodique.add(periodique);
 			} 

@@ -60,13 +60,14 @@ public class PeriodiqueController {
 	}
 	
 
-    public void filtrerDocuments(String texte) {
+    public void filtrerDocuments(String texte, String filtreActif) {
         ObservableList<Periodique> periodiquesFiltres = FXCollections.observableArrayList();
 
         for (Periodique periodiqueItem : lstObsPeriodique) {
-            if (periodiqueItem.getTitre().toLowerCase().contains(texte.toLowerCase()) || 
-                periodiqueItem.getNumPeriodique().toLowerCase().contains(texte.toLowerCase())) {
-                periodiquesFiltres.add(periodiqueItem);
+        	if ("auteur".equals(filtreActif) && periodiqueItem.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+        		periodiquesFiltres.add(periodiqueItem);
+            } else if ("motCle".equals(filtreActif) && periodiqueItem.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+            	periodiquesFiltres.add(periodiqueItem);
             }
         }
 

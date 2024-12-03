@@ -23,7 +23,7 @@ public class DVDReader {
 		
 		ObservableList<DVD> listeDVD = FXCollections.observableArrayList();
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		
 		try(InputStream inStream = DVD.class.getResourceAsStream(pathFichierTexte);
 				Scanner lecteur = new Scanner(inStream)) {
@@ -35,10 +35,11 @@ public class DVDReader {
 				String datePublicationStr = lecteur.next().trim();
 				String nbDisques = lecteur.next().trim();
 				String realisateur = lecteur.next().trim();
+				String motsCles = lecteur.next().trim();
 				
 				LocalDate datePublication = LocalDate.parse(datePublicationStr, formatter);
 				
-				DVD dvd = new DVD(numDoc,titre,datePublication,nbDisques,realisateur);
+				DVD dvd = new DVD(numDoc,titre,datePublication,nbDisques,realisateur,motsCles);
 				
 				listeDVD.add(dvd);
 			}

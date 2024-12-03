@@ -10,11 +10,14 @@ public class Livre extends Document{
 
 
 	private StringProperty auteur;
+	private StringProperty motsCles;
+	
 
-	public Livre(String numDoc, String titre, LocalDate datePublication, String auteur) {
+	public Livre(String numDoc, String titre, LocalDate datePublication, String auteur,String motsCles) {
 		// Appel au constructeur parent de Document
 		super(numDoc, titre, 0, datePublication.toString()); 
 		this.auteur = new SimpleStringProperty(auteur);
+		this.motsCles = new SimpleStringProperty(motsCles);
 	}
 
 	@Override
@@ -39,6 +42,21 @@ public class Livre extends Document{
 	public final void setAuteur(final String auteur) {
 		this.auteurProperty().set(auteur);
 	}
+
+	public final StringProperty motsClesProperty() {
+		return this.motsCles;
+	}
+	
+
+	public final String getMotsCles() {
+		return this.motsClesProperty().get();
+	}
+	
+
+	public final void setMotsCles(final String motsCles) {
+		this.motsClesProperty().set(motsCles);
+	}
+	
 
 
 }

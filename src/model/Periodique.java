@@ -11,13 +11,15 @@ public class Periodique extends Document{
 	private StringProperty numVolume;
 	private StringProperty numPeriodique;
 	private StringProperty auteur;
+	private StringProperty motsCles;
 
 
-	public Periodique(String numDoc, String titre, LocalDate datePublication, String numVolume, String numPeriodique, String auteur) {
+	public Periodique(String numDoc, String titre, LocalDate datePublication, String numVolume, String numPeriodique, String auteur, String motsCles) {
 		super(numDoc,titre,0,datePublication.toString());
 		this.numVolume = new SimpleStringProperty(numVolume);
 		this.numPeriodique = new SimpleStringProperty(numPeriodique);
 		this.auteur = new SimpleStringProperty(auteur);
+		this.motsCles = new SimpleStringProperty(motsCles);
 	}
 
 
@@ -86,6 +88,24 @@ public class Periodique extends Document{
 	public final void setAuteur(final String auteur) {
 		this.auteurProperty().set(auteur);
 	}
+
+
+	public final StringProperty motsClesProperty() {
+		return this.motsCles;
+	}
+	
+
+
+	public final String getMotsCles() {
+		return this.motsClesProperty().get();
+	}
+	
+
+
+	public final void setMotsCles(final String motsCles) {
+		this.motsClesProperty().set(motsCles);
+	}
+	
 	
 	
 }
