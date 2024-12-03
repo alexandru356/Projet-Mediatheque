@@ -73,4 +73,34 @@ public class DocumentController {
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nomEmprunteurProperty());
 	}
+	
+	public void filtrerDocuments(String texte) {
+		ObservableList<Document> documentsFiltres = FXCollections.observableArrayList();
+
+
+		for (Document doc : lstObsDoc) {
+
+			if (doc.getTitre().toLowerCase().contains(texte.toLowerCase())) {
+				documentsFiltres.add(doc);
+			} else if (doc instanceof DVD) {
+				DVD dvd = (DVD) doc;
+				if (dvd.getRealisateur().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(dvd);
+				}
+			} else if (doc instanceof Livre) {
+				Livre livre = (Livre) doc;
+				if (livre.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(livre);
+				}
+			} else if (doc instanceof Periodique) {
+				Periodique periodique = (Periodique) doc;
+				if (periodique.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(periodique);
+				}
+			}
+		}
+
+		tableViewDocs.setItems(documentsFiltres);
+	}
+
 }

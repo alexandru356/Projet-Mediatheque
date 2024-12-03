@@ -58,4 +58,20 @@ public class PeriodiqueController {
 
 		tableViewPeriodique.setItems(lstObsPeriodique);
 	}
+	
+
+    public void filtrerDocuments(String texte) {
+        ObservableList<Periodique> periodiquesFiltres = FXCollections.observableArrayList();
+
+        for (Periodique periodiqueItem : lstObsPeriodique) {
+            if (periodiqueItem.getTitre().toLowerCase().contains(texte.toLowerCase()) || 
+                periodiqueItem.getNumPeriodique().toLowerCase().contains(texte.toLowerCase())) {
+                periodiquesFiltres.add(periodiqueItem);
+            }
+        }
+
+
+        tableViewPeriodique.setItems(periodiquesFiltres);
+    }
+
 }
