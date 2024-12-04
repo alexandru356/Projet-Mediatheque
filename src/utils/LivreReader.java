@@ -32,10 +32,11 @@ public class LivreReader {
 				String titre = lecteur.next().trim();
 				String datePublicationStr = lecteur.next().trim();
 				String auteur = lecteur.next().trim();
+				String motsCles = lecteur.next().trim();
 				
 				LocalDate datePublication = LocalDate.parse(datePublicationStr, formatter);
 				
-				Livre livre = new Livre(numDoc,titre,datePublication,auteur);
+				Livre livre = new Livre(numDoc,titre,datePublication,auteur,motsCles);
 				
 				listeLivre.add(livre);
 				} 

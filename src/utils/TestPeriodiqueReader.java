@@ -9,7 +9,7 @@ public class TestPeriodiqueReader {
 		
 		ObservableList<Periodique> p = PeriodiqueReader.chargerFichier("Periodiques.txt");
 		  for (Periodique pe : p) {
-	            System.out.println(pe);  
+	            System.out.println(pe);  //ou call the get method pour montrer les mots cles ajouter
 	        }
 	}
 }

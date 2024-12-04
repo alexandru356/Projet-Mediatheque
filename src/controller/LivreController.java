@@ -55,12 +55,14 @@ public class LivreController {
 	}
 	
 
-    public void filtrerDocuments(String texte) {
+    public void filtrerDocuments(String texte, String filtreActif) {
         ObservableList<Livre> livresFiltres = FXCollections.observableArrayList();
 
         for (Livre livre : lstObsLivre) {
-            if (livre.getTitre().toLowerCase().contains(texte.toLowerCase()) || livre.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
-                livresFiltres.add(livre);
+        	if ("auteur".equals(filtreActif) && livre.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+        		livresFiltres.add(livre);
+            } else if ("motCle".equals(filtreActif) && livre.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+            	livresFiltres.add(livre);
             }
         }
 
