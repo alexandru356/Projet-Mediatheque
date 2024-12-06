@@ -11,11 +11,11 @@ public class Personne {
 	private StringProperty adresse;
 	private StringProperty passwd;
 
-	public Personne(String nom, String prenom, String numTelephone, String adresse,String passwd) {
+	public Personne(String nom, String prenom, String adresse, String numTelephone,String passwd) {
 		this.nom = new SimpleStringProperty(nom);
 		this.prenom = new SimpleStringProperty(prenom);
-		this.numTelephone = new SimpleStringProperty(numTelephone);
 		this.adresse = new SimpleStringProperty(adresse);
+		this.numTelephone = new SimpleStringProperty(numTelephone);
 		this.passwd = new SimpleStringProperty(passwd);
 	}
 

@@ -7,8 +7,8 @@ public class Prepose extends Personne {
 	
 	private final StringProperty numEmp;
 	  
-	public Prepose(String numEmp,String nom, String prenom, String numTelephone, String adresse,String passwd) {
-		super(nom, prenom, numTelephone, adresse, passwd);
+	public Prepose(String numEmp,String nom, String prenom, String adresse, String numTelephone,String passwd) {
+		super(nom, prenom, adresse, numTelephone, passwd);
 		this.numEmp = new SimpleStringProperty(numEmp);
 	}
 	
