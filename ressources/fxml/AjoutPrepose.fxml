@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterPrepose">
    <children>
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" wrappingWidth="33.13671875" />
       <Text layoutX="14.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :" />
@@ -18,7 +17,7 @@
       <TextField fx:id="tfAdresse" layoutX="272.0" layoutY="58.0" prefHeight="25.0" prefWidth="186.0" />
       <TextField fx:id="tfTelephone" layoutX="272.0" layoutY="82.0" prefHeight="25.0" prefWidth="186.0" />
       <TextField fx:id="tfMDP" layoutX="272.0" layoutY="108.0" prefHeight="25.0" prefWidth="186.0" />
-      <Button fx:id="btnConfirmer" layoutX="241.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Confirmer" />
-      <Button fx:id="btnAnnuler" layoutX="354.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Annuler" />
+      <Button fx:id="btnConfirmer" layoutX="241.0" layoutY="150.0" mnemonicParsing="false" onAction="#confirmerAjout" prefHeight="25.0" prefWidth="104.0" text="Confirmer" />
+      <Button fx:id="btnAnnuler" layoutX="354.0" layoutY="150.0" mnemonicParsing="false" onAction="#annuler" prefHeight="25.0" prefWidth="104.0" text="Annuler" />
    </children>
 </AnchorPane>

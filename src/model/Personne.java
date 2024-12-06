@@ -9,12 +9,14 @@ public class Personne {
 	private StringProperty prenom;
 	private StringProperty numTelephone;
 	private StringProperty adresse;
+	private StringProperty passwd;
 
-	public Personne(String nom, String prenom, String numTelephone, String adresse) {
+	public Personne(String nom, String prenom, String numTelephone, String adresse,String passwd) {
 		this.nom = new SimpleStringProperty(nom);
 		this.prenom = new SimpleStringProperty(prenom);
 		this.numTelephone = new SimpleStringProperty(numTelephone);
 		this.adresse = new SimpleStringProperty(adresse);
+		this.passwd = new SimpleStringProperty(passwd);
 	}
 
 
@@ -85,4 +87,22 @@ public class Personne {
 				"\nNuméro de téléphone: " + numTelephone.get() + 
 				"\nAdresse: " + adresse.get();
 	}
+
+
+	public final StringProperty passwdProperty() {
+		return this.passwd;
+	}
+	
+
+
+	public final String getPasswd() {
+		return this.passwdProperty().get();
+	}
+	
+
+
+	public final void setPasswd(final String passwd) {
+		this.passwdProperty().set(passwd);
+	}
+	
 }

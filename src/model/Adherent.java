@@ -19,8 +19,8 @@ public class Adherent extends Personne{
 	private static final int MAX_PERIODIQUES = 1;
 	private static final double AMENDE_PAR_JOUR = 0.50; 
 
-	public Adherent(int numInscription, String numTelephone, String nom, String prenom, String adresse) {
-		super(nom,prenom,numTelephone,adresse);
+	public Adherent(int numInscription, String numTelephone, String nom, String prenom, String adresse, String passwd) {
+		super(nom,prenom,numTelephone,adresse,passwd);
 		this.numInscription = new SimpleIntegerProperty(numInscription);
 		this.amende = new SimpleDoubleProperty(0.0);
 	}
