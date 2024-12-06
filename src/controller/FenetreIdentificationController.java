@@ -1,6 +1,7 @@
 package controller;
 
-import javafx.application.Platform;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
+import utils.ValidationIdentification;
 
 public class FenetreIdentificationController {
     
@@ -71,5 +73,38 @@ public class FenetreIdentificationController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    
+    public void connexionAdmin() throws FileNotFoundException, IOException {
+    	String identifiant = tfNumEmploye.getText();
+    	String motDePasse = tfMDP.getText();
+    	
+    	System.out.println("Identifiant: " + identifiant);
+        System.out.println("Mot de passe: " + motDePasse);
+
+    	
+    	boolean identifantsValide = ValidationIdentification.verifierId(identifiant, motDePasse);
+    	
+		if (identifantsValide) {
+			ouvrirVueAdmin();
+		} else {
+			System.err.println("Identifiants invalide");
+		}
+    }
+    
+    public void ouvrirVueAdmin() {
+    	
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VueAdmin.fxml"));
+    		Parent root = loader.load();
+    		Scene scene = new Scene(root);
+    		Stage stage = new Stage();
+    		stage.setScene(scene);
+    		stage.setTitle("Médiathèque Admin");
+    		stage.show();
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
     }
 }
