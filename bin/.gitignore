@@ -1,6 +1,3 @@
-/model/
-/fxml/
-/controller/
 /utils/
-/application/
-/donnees/
+/controller/
+/fxml/
