@@ -108,7 +108,7 @@
                <content>
                   <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="237.0" prefWidth="301.0">
                      <children>
-                        <Button fx:id="btnConnexion" layoutX="67.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" text="Connexion" />
+                        <Button fx:id="btnConnexion" onAction="#connexionAdmin" layoutX="67.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" text="Connexion" />
                         <Text layoutX="16.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Employe :" />
                         <Text layoutX="16.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :" />
                         <TextField fx:id="tfNumEmploye" layoutX="138.0" layoutY="36.0" />
