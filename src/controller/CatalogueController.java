@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -74,6 +75,9 @@ public class CatalogueController {
 	private Tab tabPeriodiques;
 
 	@FXML
+	private TabPane tabPane;
+
+	@FXML
 	private TableView<Document> tableDocuments;
 
 	private DocumentController docController;
@@ -90,7 +94,7 @@ public class CatalogueController {
 		tfRecherche.clear();
 	}
 
-	public void TypeIdentigication () {
+	public void TypeIdentification () {
 		if (rdIdentificationTelephone.isSelected()) {
 			tfNom.setVisible(false);
 			tfPrenom.setVisible(false);
@@ -157,6 +161,18 @@ public class CatalogueController {
 
 		group1.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
 			rechercherDansTousLesTabs(tfRecherche.getText());
+		});
+		
+		//si user selectionne le tab periodique, on desactive le bouton radio auteur 
+		//car periodique n'a pas d'auteur
+		tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+			if (newTab == tabPeriodiques) {
+
+				rdAuteur.setDisable(true);
+			} else {
+
+				rdAuteur.setDisable(false);
+			}
 		});
 	}
 

@@ -84,6 +84,15 @@ public class GestionPreposeController {
 		}
 	}
 	
+	
+	public static boolean connexionEmp(String id, String mdp) {
+		for(Prepose p : preposeList) {
+			if (p.getNumEmp().equals(id) && p.getPasswd().equals(mdp)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public void deconnexion() {
 		Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
 		stage.close();

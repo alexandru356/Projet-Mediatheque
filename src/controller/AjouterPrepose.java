@@ -29,7 +29,12 @@ public class AjouterPrepose {
 		Stage stage = (Stage) btnAnnuler.getScene().getWindow();
 		stage.close();
 	}
-	
+	public void confirmer() {
+		
+		//TODO: si tout les fields sont remplis et valides. utilise regex pour verifier numTel PAS ADRESSE
+		//Stage stage = (Stage) btnConfirmer.getScene().getWindow();
+		//stage.close();
+	}
 	@FXML
 	private void confirmerAjout() {
 		String numEmp = "P" + counter++;
@@ -52,4 +57,6 @@ public class AjouterPrepose {
 			tfMDP.clear();
 		}	//implement else with warning when time comes
 	}
+	
+	
 }

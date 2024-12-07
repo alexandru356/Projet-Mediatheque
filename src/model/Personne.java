@@ -11,12 +11,11 @@ public class Personne {
 	private StringProperty adresse;
 	private StringProperty passwd;
 
-	public Personne(String nom, String prenom, String adresse, String numTelephone,String passwd) {
+	public Personne(String nom, String prenom, String adresse, String numTelephone) {
 		this.nom = new SimpleStringProperty(nom);
 		this.prenom = new SimpleStringProperty(prenom);
 		this.adresse = new SimpleStringProperty(adresse);
 		this.numTelephone = new SimpleStringProperty(numTelephone);
-		this.passwd = new SimpleStringProperty(passwd);
 	}
 
 
@@ -89,20 +88,5 @@ public class Personne {
 	}
 
 
-	public final StringProperty passwdProperty() {
-		return this.passwd;
-	}
-	
-
-
-	public final String getPasswd() {
-		return this.passwdProperty().get();
-	}
-	
-
-
-	public final void setPasswd(final String passwd) {
-		this.passwdProperty().set(passwd);
-	}
 	
 }

@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="868.0" prefWidth="1704.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueController">
    <children>
-      <TabPane layoutY="100.0" prefHeight="732.0" prefWidth="1250.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="732.0" prefWidth="1250.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabTousLesDocuments" text="Tous les documents">
             <content>
@@ -94,7 +94,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Text>
-            <RadioButton fx:id="rdIdentificationNom" mnemonicParsing="false" onAction="#TypeIdentigication" text="nom et prénom" GridPane.columnIndex="2">
+            <RadioButton fx:id="rdIdentificationNom" mnemonicParsing="false" onAction="#TypeIdentification" text="nom et prénom" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets bottom="45.0" />
                </GridPane.margin>
@@ -105,7 +105,7 @@
                   <Insets left="70.0" top="10.0" />
                </padding>
             </RadioButton>
-            <RadioButton fx:id="rdIdentificationTelephone" mnemonicParsing="false" onAction="#TypeIdentigication" prefHeight="33.0" prefWidth="234.0" text="téléphone" GridPane.columnIndex="2">
+            <RadioButton fx:id="rdIdentificationTelephone" mnemonicParsing="false" onAction="#TypeIdentification" prefHeight="33.0" prefWidth="234.0" text="téléphone" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets top="35.0" />
                </GridPane.margin>
