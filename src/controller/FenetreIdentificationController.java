@@ -147,6 +147,9 @@ public class FenetreIdentificationController {
 	public void ouvrirVueAdmin() {
 
 		try {
+			Stage currentStage = (Stage) btnCatalogue.getScene().getWindow();
+			currentStage.close();
+			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VueAdmin.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
@@ -160,6 +163,9 @@ public class FenetreIdentificationController {
 	}
 	public void ouvrirVueEmploye() {
 		try {
+			Stage currentStage = (Stage) btnCatalogue.getScene().getWindow();
+			currentStage.close();
+			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainViewEmploye.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
