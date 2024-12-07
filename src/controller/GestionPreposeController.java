@@ -94,8 +94,20 @@ public class GestionPreposeController {
 		return false;
 	}
 	public void deconnexion() {
-		Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
-		stage.close();
+		try {
+			Stage currentStage = (Stage) btnDeconnexion.getScene().getWindow();
+			currentStage.close();
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueIdentification.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Médiathèque Employe");
+			stage.show();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		
 	}
