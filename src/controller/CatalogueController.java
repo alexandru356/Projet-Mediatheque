@@ -87,7 +87,20 @@ public class CatalogueController {
 
 
 	public void Quitter () {
-		Platform.exit();
+		try {
+			Stage currentStage = (Stage) btnQuitter.getScene().getWindow();
+			currentStage.close();
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueIdentification.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Médiathèque Employe");
+			stage.show();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void Effacer () {
@@ -110,6 +123,44 @@ public class CatalogueController {
 			txtNom.setVisible(true);
 			txtPrenom.setVisible(true);
 		}
+	}
+	
+	public void Login() {
+		
+		Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+		
+		if(rdIdentificationNom.isSelected()) {
+			
+			String nom = tfNom.getText();
+			String prenom = tfPrenom.getText();
+			
+			//Pour faire des tests
+			//System.out.print("nom : ." + nom + ".");
+			
+			
+			//Gerer les messages d'erreurs different et si le login est bon
+			if(nom == "" /*Ajouter pour si le nom n'est pas un nom d'adherent valide*/) {
+				
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Nom invalide !");
+				errorAlert.setContentText("Vous n'avez pas tape votre nom.");
+				errorAlert.show();
+				
+			}else if(prenom == ""/*Ajouter pour si le prenom n'est pas un prenom d'adherent valide*/) {
+				
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Prenom invalide !");
+				errorAlert.setContentText("Vous n'avez pas tape votre prenom.");
+				errorAlert.show();
+				
+			}else {
+				// si tout est correcte.
+			}
+			
+		}else{
+			//identification par telephone
+		}
+		
 	}
 
 	public CatalogueController () {
