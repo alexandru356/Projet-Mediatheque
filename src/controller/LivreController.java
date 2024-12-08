@@ -53,7 +53,16 @@ public class LivreController {
 		
 		tableViewLivres.setItems(lstObsLivre);
 	}
-	
+	public void ajouterLivre(Livre livre) {
+	    lstObsLivre.add(livre); 
+	    tableViewLivres.refresh(); 
+	}
+	public ObservableList<Livre> getObservableList() {
+	    return lstObsLivre;
+	}
+	public TableView<Livre> getTableView() {
+	    return tableViewLivres;
+	}
 
     public void filtrerDocuments(String texte, String filtreActif) {
         ObservableList<Livre> livresFiltres = FXCollections.observableArrayList();

@@ -5,12 +5,14 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 public class CatalogueLoggedController {
 
@@ -22,6 +24,9 @@ public class CatalogueLoggedController {
 	
 	@FXML
 	private Button btnEffacer;
+	
+	@FXML
+	private Button btnAjouterDoc;
 
 	@FXML
 	private TextField tfRecherche;
@@ -117,5 +122,20 @@ public class CatalogueLoggedController {
 			return "motCle";
 		}
 		return "";
+	}
+	
+	@FXML
+	private void ajouterDoc() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AjoutDoc.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Ajouter un document");
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
