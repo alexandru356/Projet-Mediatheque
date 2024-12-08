@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.application.Platform;
@@ -18,6 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Document;
+import utils.ValidationIdentification;
 
 public class CatalogueController {
 
@@ -128,7 +130,24 @@ public class CatalogueController {
 		}
 	}
 	
-	public void Login() {
+	public void ouvrirDossier() {
+		try {
+			Stage currentStage = (Stage) btnQuitter.getScene().getWindow();
+			currentStage.close();
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueDossier.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Votre dossier");
+			stage.show();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void Login() throws FileNotFoundException, IOException {
 		
 		Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 		
@@ -142,26 +161,44 @@ public class CatalogueController {
 			
 			
 			//Gerer les messages d'erreurs different et si le login est bon
-			if(nom == "" /*Ajouter pour si le nom n'est pas un nom d'adherent valide*/) {
+			if(nom == "") {
 				
 				errorAlert.setTitle("Erreur");
 				errorAlert.setHeaderText("Nom invalide !");
 				errorAlert.setContentText("Vous n'avez pas tape votre nom.");
 				errorAlert.show();
 				
-			}else if(prenom == ""/*Ajouter pour si le prenom n'est pas un prenom d'adherent valide*/) {
+			}else if(prenom == "") {
 				
 				errorAlert.setTitle("Erreur");
 				errorAlert.setHeaderText("Prenom invalide !");
 				errorAlert.setContentText("Vous n'avez pas tape votre prenom.");
 				errorAlert.show();
 				
+			}else if(!ValidationIdentification.verifierNomPrenom(nom, prenom)){
+				
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Compte invalide !");
+				errorAlert.setContentText("Les donnees que vous avez entre ne correspondent pas a un adherent valide.");
+				errorAlert.show();
+				
 			}else {
-				// si tout est correcte.
+				ouvrirDossier();
 			}
 			
 		}else{
-			//identification par telephone
+			
+			String telephone = tfTelephone.getText();
+			
+			if (!ValidationIdentification.verifierFomartTelephone(telephone)) {
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Numero de telephone invalide !");
+				errorAlert.setContentText("Le format du numero de telephone n'est pas valide.\n"
+						+ "(***) ***-****");
+				errorAlert.show();
+			}else {
+				ouvrirDossier();
+			}
 		}
 		
 	}

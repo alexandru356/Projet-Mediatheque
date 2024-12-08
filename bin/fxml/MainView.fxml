@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="868.0" prefWidth="1704.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="868.0" prefWidth="1704.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueController">
    <children>
       <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="732.0" prefWidth="1250.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -142,7 +142,7 @@
                   <Insets right="10.0" top="70.0" />
                </GridPane.margin>
             </TextField>
-            <Button fx:id="btnConsulter" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" text="Consulter mon dossier" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button fx:id="btnConsulter" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="203.0" text="Consulter mon dossier" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
