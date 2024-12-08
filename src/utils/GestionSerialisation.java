@@ -11,6 +11,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Adherent;
 import model.Prepose;
 
 public class GestionSerialisation {
@@ -38,5 +39,27 @@ public class GestionSerialisation {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public static void serealiserAdherent(ObservableList<Adherent> adherentList) {
+    	try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/adherents.ser"))){
+    		oos.writeObject(new ArrayList<Adherent>(adherentList));
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    public static ObservableList<Adherent> deserealiserAdherent() {
+    	List<Adherent> adherentList = null;
+    	try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data/adherent.ser"))){
+    		adherentList = (List<Adherent>) ois.readObject();
+    		
+    		return FXCollections.observableArrayList(adherentList);
+    		
+    	} catch (IOException | ClassNotFoundException e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return null;
     }
 }

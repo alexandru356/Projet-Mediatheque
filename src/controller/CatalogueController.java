@@ -113,20 +113,23 @@ public class CatalogueController {
 	}
 
 	public void TypeIdentification () {
-		if (rdIdentificationTelephone.isSelected()) {
-			tfNom.setVisible(false);
-			tfPrenom.setVisible(false);
-			tfTelephone.setVisible(true);
-			txtTelephone.setVisible(true);
-			txtNom.setVisible(false);
-			txtPrenom.setVisible(false);
-		}else {
+		if (rdIdentificationNom.isSelected()) {
 			tfNom.setVisible(true);
 			tfPrenom.setVisible(true);
-			tfTelephone.setVisible(false);
-			txtTelephone.setVisible(false);
 			txtNom.setVisible(true);
 			txtPrenom.setVisible(true);
+			tfTelephone.setVisible(false);
+			txtTelephone.setVisible(false);
+			tfTelephone.clear();
+		} else {
+			tfNom.setVisible(false);
+			tfPrenom.setVisible(false);
+			txtNom.setVisible(false);
+			txtPrenom.setVisible(false);
+			txtTelephone.setVisible(true);
+			tfTelephone.setVisible(true);
+			tfNom.clear();
+			tfPrenom.clear();
 		}
 	}
 	
@@ -149,12 +152,14 @@ public class CatalogueController {
 	
 	public void Login() throws FileNotFoundException, IOException {
 		
-		Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 		
 		if(rdIdentificationNom.isSelected()) {
 			
 			String nom = tfNom.getText();
 			String prenom = tfPrenom.getText();
+			
+			Boolean adherentValid = GestionAdherentController.connexionAdhNom(nom, prenom);
 			
 			//Pour faire des tests
 			//System.out.print("nom : ." + nom + ".");
@@ -175,20 +180,22 @@ public class CatalogueController {
 				errorAlert.setContentText("Vous n'avez pas tape votre prenom.");
 				errorAlert.show();
 				
-			}else if(!ValidationIdentification.verifierNomPrenom(nom, prenom)){
+			}else if(adherentValid){
 				
+				ouvrirDossier();
+				
+			}else {
 				errorAlert.setTitle("Erreur");
 				errorAlert.setHeaderText("Compte invalide !");
 				errorAlert.setContentText("Les donnees que vous avez entre ne correspondent pas a un adherent valide.");
 				errorAlert.show();
-				
-			}else {
-				ouvrirDossier();
 			}
 			
 		}else{
 			
 			String telephone = tfTelephone.getText();
+			
+			Boolean adherentValid = GestionAdherentController.connexionAdhTel(telephone);
 			
 			if (!ValidationIdentification.verifierFomartTelephone(telephone)) {
 				errorAlert.setTitle("Erreur");
@@ -196,8 +203,13 @@ public class CatalogueController {
 				errorAlert.setContentText("Le format du numero de telephone n'est pas valide.\n"
 						+ "(***) ***-****");
 				errorAlert.show();
-			}else {
+			}else if (adherentValid){
 				ouvrirDossier();
+			} else {
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Compte invalide !");
+				errorAlert.setContentText("Les donnees que vous avez entre ne correspondent pas a un adherent valide.");
+				errorAlert.show();
 			}
 		}
 		
