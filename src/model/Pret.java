@@ -45,9 +45,6 @@ public class Pret {
 	public final void setDatePret(final LocalDate datePret) {
 		this.datePretProperty().set(datePret);
 	}
-	
-
-
 
 
 	public final ObjectProperty<LocalDate> dateRetourProperty() {
