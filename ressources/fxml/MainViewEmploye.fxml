@@ -83,7 +83,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnAjouterDoc" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Ajouter un document" />
+                              <Button fx:id="btnAjouterDoc" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajouterDoc" prefHeight="25.0" prefWidth="146.0" text="Ajouter un document" />
                               <Button fx:id="btnSupprimerDoc" layoutX="28.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Supprimer un document" />
                            </children>
                         </AnchorPane>

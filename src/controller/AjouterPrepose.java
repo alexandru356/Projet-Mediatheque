@@ -27,7 +27,7 @@ public class AjouterPrepose {
 	@FXML
 	Button btnAnnuler;
 
-	public static int counter = 2001;
+	public static int counter = 20001;
 	
 	
 	public void annuler() {
