@@ -31,7 +31,7 @@ public class ValidationIdentification {
 		}
 		return false;
 	}
-	
+
 	public static boolean verifierNomPrenom(String nom, String prenom)  throws FileNotFoundException, IOException {
 		
 		String pathFichierTexte = "/donnees/ComptesAdherent.txt";
