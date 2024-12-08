@@ -109,6 +109,7 @@ public class GestionPreposeController {
 		}
 		return false;
 	}
+	
 	public void deconnexion() {
 		try {
 			Stage currentStage = (Stage) btnDeconnexion.getScene().getWindow();
