@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -102,6 +103,80 @@ public class FenetreIdentificationController {
 			tfTelephone.setVisible(true);
 		}
 	}
+	
+	public void ouvrirDossier() {
+		try {
+			Stage currentStage = (Stage) btnConsulter.getScene().getWindow();
+			currentStage.close();
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueDossier.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Votre dossier");
+			stage.show();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void Login() throws FileNotFoundException, IOException {
+		
+		Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+		
+		if(rdIdentificationNom.isSelected()) {
+			
+			String nom = tfNom.getText();
+			String prenom = tfPrenom.getText();
+			
+			//Pour faire des tests
+			//System.out.print("nom : ." + nom + ".");
+			
+			
+			//Gerer les messages d'erreurs different et si le login est bon
+			if(nom == "") {
+				
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Nom invalide !");
+				errorAlert.setContentText("Vous n'avez pas tape votre nom.");
+				errorAlert.show();
+				
+			}else if(prenom == "") {
+				
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Prenom invalide !");
+				errorAlert.setContentText("Vous n'avez pas tape votre prenom.");
+				errorAlert.show();
+				
+			}else if(!ValidationIdentification.verifierNomPrenom(nom, prenom)){
+				
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Compte invalide !");
+				errorAlert.setContentText("Les donnees que vous avez entre ne correspondent pas a un adherent valide.");
+				errorAlert.show();
+				
+			}else {
+				ouvrirDossier();
+			}
+			
+		}else{
+			
+			String telephone = tfTelephone.getText();
+			
+			if (!ValidationIdentification.verifierFomartTelephone(telephone)) {
+				errorAlert.setTitle("Erreur");
+				errorAlert.setHeaderText("Numero de telephone invalide !");
+				errorAlert.setContentText("Le format du numero de telephone n'est pas valide.\n"
+						+ "(***) ***-****");
+				errorAlert.show();
+			}else {
+				ouvrirDossier();
+			}
+		}
+		
+	}
+	
 	public void OuvrirCatalogue() {
 		try {
 			Stage currentStage = (Stage) btnCatalogue.getScene().getWindow();
