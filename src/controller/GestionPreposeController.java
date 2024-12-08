@@ -1,5 +1,13 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Prepose;
+import utils.GestionSerialisation;
 
 public class GestionPreposeController {
 
@@ -39,9 +48,15 @@ public class GestionPreposeController {
 
 	static ObservableList<Prepose> preposeList = FXCollections.observableArrayList();
 
-
 	@FXML
 	public void initialize() {
+
+		preposeList = GestionSerialisation.deserialiserPrepose();
+
+		if (preposeList == null) {
+			preposeList = FXCollections.observableArrayList(); 
+		}
+		System.out.println(preposeList);
 		tcNumEmp.setCellValueFactory(donnee -> donnee.getValue().numEmpProperty());
 		tcNom.setCellValueFactory(donnee -> donnee.getValue().nomProperty());
 		tcPrenom.setCellValueFactory(donnee -> donnee.getValue().prenomProperty());
@@ -53,16 +68,17 @@ public class GestionPreposeController {
 	public static void addPreposeToTable(Prepose prepose) {
 
 		preposeList.add(prepose);
+		GestionSerialisation.serialiserPrepose(preposeList);
+		System.out.println(preposeList);
 	}
 
 	public void supprimerPrepose() {
 		Prepose selectedPrepose = tableViewPrepose.getSelectionModel().getSelectedItem();
 
 		if (selectedPrepose != null) {
-
 			preposeList.remove(selectedPrepose);
+			GestionSerialisation.serialiserPrepose(preposeList);
 		} else {
-
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Avertissement");
 			alert.setHeaderText("Aucun préposé sélectionné");
@@ -83,8 +99,8 @@ public class GestionPreposeController {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	public static boolean connexionEmp(String id, String mdp) {
 		for(Prepose p : preposeList) {
 			if (p.getNumEmp().equals(id) && p.getPasswd().equals(mdp)) {
@@ -97,7 +113,7 @@ public class GestionPreposeController {
 		try {
 			Stage currentStage = (Stage) btnDeconnexion.getScene().getWindow();
 			currentStage.close();
-			
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueIdentification.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
@@ -108,7 +124,7 @@ public class GestionPreposeController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 }
