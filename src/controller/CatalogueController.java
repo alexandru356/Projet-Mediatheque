@@ -159,7 +159,7 @@ Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 			String nom = tfNom.getText();
 			String prenom = tfPrenom.getText();
 			
-			Boolean adherentValid = GestionAdherentController.connexionAdhNom(nom, prenom);
+			Boolean adherentValid = CatalogueLoggedController.connexionAdhNom(nom, prenom);
 			
 			//Pour faire des tests
 			//System.out.print("nom : ." + nom + ".");
@@ -195,7 +195,7 @@ Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 			
 			String telephone = tfTelephone.getText();
 			
-			Boolean adherentValid = GestionAdherentController.connexionAdhTel(telephone);
+			Boolean adherentValid = CatalogueLoggedController.connexionAdhTel(telephone);
 			
 			if (!ValidationIdentification.verifierFomartTelephone(telephone)) {
 				errorAlert.setTitle("Erreur");

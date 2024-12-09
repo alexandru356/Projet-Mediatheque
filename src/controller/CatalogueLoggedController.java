@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.Adherent;
+import utils.GestionSerialisation;
 
 public class CatalogueLoggedController {
 
@@ -29,7 +32,13 @@ public class CatalogueLoggedController {
 	private Button btnEffacer;
 	
 	@FXML
+	private Button btnAjouterAdherent;
+	
+	@FXML
 	private Button btnAjouterDoc;
+	
+	@FXML
+	private Button btnDeconnexion;
 
 	@FXML
 	private TextField tfRecherche;
@@ -37,6 +46,7 @@ public class CatalogueLoggedController {
 	@FXML
 	private TabPane tabPane;
 	
+
 	@FXML
 	private Tab tabTousLesDocuments;
 
@@ -76,6 +86,8 @@ public class CatalogueLoggedController {
 	@FXML
 	TableColumn<Adherent, String> tcSoldeDu;
 	
+	
+	
 	public void afficherListeAdherents() {
 		tvAdherents.setVisible(true);
 	}
@@ -83,22 +95,72 @@ public class CatalogueLoggedController {
 	public void cacherListeAdherent() {
 		tvAdherents.setVisible(false);
 	}
+	public static boolean connexionAdhNom(String nom, String prenom) {
+		for(Adherent a : adherentList) {
+			if (a.getNom().equals(nom) && a.getPrenom().equals(prenom)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
+	public static boolean connexionAdhTel (String tel) {
+		for(Adherent a : adherentList) {
+			if (a.getNumTelephone().equals(tel)) {
+				return true;
+			}
+		}	
+		return false;
+	}
+	
+	public void modifierAdherent() {
+		//TODO
+	}
+	
+	public void payerSolde() {
+		//TODO
+	}
+	
+	public void supprimerAdherent() {
+		//TODO
+	}
 	//----------------------------------------------------------------------------------------	
 	
 	private DocumentController docController;
 	private LivreController livreController;
 	private DVDController dvdController;
 	private PeriodiqueController periodiqueController;
-
+	static ObservableList<Adherent> adherentList = FXCollections.observableArrayList();
 	
 	@FXML
 	public void Effacer () {
 		tfRecherche.clear();
 	}
 	
+	public static void addAdherentToTable(Adherent adherent) {
+		adherentList.add(adherent);
+		GestionSerialisation.serealiserAdherent(adherentList);
+		System.out.println(adherentList);
+	}
+	
 	@FXML
 	public void initialize() throws IOException {
+		
+		
+		adherentList = GestionSerialisation.deserealiserAdherent();
+		
+		if (adherentList == null) {
+			adherentList = FXCollections.observableArrayList();
+		}
+		
+		tcNumAdherent.setCellValueFactory(cellData -> cellData.getValue().numInscriptionProperty());
+		tcNomAdherent.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
+		tcPrenomAdherent.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
+		tcAdresse.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
+		tcTelephoneAdherent.setCellValueFactory(cellData -> cellData.getValue().numTelephoneProperty());
+		tvAdherents.setItems(adherentList);
+		
+		
 		ToggleGroup group1 = new ToggleGroup();
 		rdAuteur.setToggleGroup(group1);
 		rdMotCle.setToggleGroup(group1);
@@ -141,8 +203,41 @@ public class CatalogueLoggedController {
 				rdAuteur.setDisable(false);
 			}
 		});
+		
+		
+		
 	}
 	
+	
+	public void deconnexion() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueIdentification.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
+			stage.close();
+			stage.setScene(scene);
+			stage.setTitle("Identification");
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void AjoutAdherent() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AjoutAdherent.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Ajouter un adhérent");
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void rechercherDansTousLesTabs(String texte) {
 

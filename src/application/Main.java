@@ -19,7 +19,7 @@ public class Main extends Application {
 	    LivreController livreController = new LivreController();
 	    DocumentController documentController = new DocumentController();
 	    AjouterDoc ajouterDoc = new AjouterDoc();
-
+	    
 	    ajouterDoc.setLivreController(livreController);
 	    ajouterDoc.setDocumentController(documentController);
 	    

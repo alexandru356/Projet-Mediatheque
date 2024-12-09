@@ -42,7 +42,7 @@ public class GestionSerialisation {
     }
     
     public static void serealiserAdherent(ObservableList<Adherent> adherentList) {
-    	try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/adherents.ser"))){
+    	try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/adherent.ser"))){
     		oos.writeObject(new ArrayList<Adherent>(adherentList));
     	} catch (IOException e) {
     		e.printStackTrace();

@@ -133,7 +133,7 @@ public class FenetreIdentificationController {
 			String nom = tfNom.getText();
 			String prenom = tfPrenom.getText();
 			
-			Boolean adherentValid = GestionAdherentController.connexionAdhNom(nom, prenom);
+			Boolean adherentValid = CatalogueLoggedController.connexionAdhNom(nom, prenom);
 			
 			//Pour faire des tests
 			//System.out.print("nom : ." + nom + ".");
@@ -169,7 +169,7 @@ public class FenetreIdentificationController {
 			
 			String telephone = tfTelephone.getText();
 			
-			Boolean adherentValid = GestionAdherentController.connexionAdhTel(telephone);
+			Boolean adherentValid = CatalogueLoggedController.connexionAdhTel(telephone);
 			
 			if (!ValidationIdentification.verifierFomartTelephone(telephone)) {
 				errorAlert.setTitle("Erreur");
