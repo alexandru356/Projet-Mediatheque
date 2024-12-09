@@ -6,13 +6,15 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.8612637362637363" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="1458.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueLoggedController">
+<SplitPane dividerPositions="0.8612637362637363" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="1458.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogueLoggedController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="866.0" prefWidth="1281.0">
          <children>
@@ -74,12 +76,23 @@
                   </Tab>
                </tabs>
             </TabPane>
+            <TableView fx:id="tvAdherents" layoutX="1.0" prefHeight="796.0" prefWidth="1251.0" visible="false">
+              <columns>
+                <TableColumn fx:id="tcNumAdherent" prefWidth="114.0" text="Numero adherent" />
+                <TableColumn fx:id="tcNomAdherent" prefWidth="179.0" text="Nom" />
+                  <TableColumn fx:id="tcPrenomAdherent" prefWidth="197.0" text="Prenom" />
+                  <TableColumn fx:id="tcAdresse" prefWidth="417.0" text="Adresse" />
+                  <TableColumn fx:id="tcTelephoneAdherent" prefWidth="151.0" text="Telephone" />
+                  <TableColumn fx:id="tcPretActifs" prefWidth="121.0" text="Prets actifs" />
+                  <TableColumn fx:id="tcSoldeDu" prefWidth="71.0" text="Solde du" />
+              </columns>
+            </TableView>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="193.0">
          <children>
             <Accordion maxHeight="1.7976931348623157E308" prefHeight="181.0" prefWidth="202.0">
               <panes>
-                <TitledPane fx:id="tpCatalogue" animated="false" maxHeight="-Infinity" prefHeight="167.0" prefWidth="202.0" text="Gestion Catalogue">
+                <TitledPane fx:id="tpCatalogue" animated="false" maxHeight="-Infinity" onMouseClicked="#cacherListeAdherent" prefHeight="167.0" prefWidth="202.0" text="Gestion Catalogue">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="200.0">
                            <children>
@@ -89,7 +102,7 @@
                         </AnchorPane>
                   </content>
                 </TitledPane>
-                <TitledPane fx:id="tpAdherent" animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="186.0" prefWidth="202.0" text="Gestion adherent">
+                <TitledPane fx:id="tpAdherent" animated="false" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#afficherListeAdherents" prefHeight="186.0" prefWidth="202.0" text="Gestion adherent">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -101,7 +114,7 @@
                         </AnchorPane>
                   </content>
                 </TitledPane>
-                <TitledPane fx:id="tpPret" animated="false" maxHeight="-Infinity" prefHeight="168.0" prefWidth="202.0" text="Gestion pret">
+                <TitledPane fx:id="tpPret" animated="false" maxHeight="-Infinity" onMouseClicked="#cacherListeAdherent" prefHeight="168.0" prefWidth="202.0" text="Gestion pret">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
