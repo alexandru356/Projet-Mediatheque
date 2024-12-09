@@ -107,6 +107,7 @@ public class FenetreIdentificationController {
 		}
 	}
 	
+	//ouvrir dossier adherent
 	public void ouvrirDossier() {
 		try {
 			Stage currentStage = (Stage) btnConsulter.getScene().getWindow();
@@ -206,7 +207,8 @@ public class FenetreIdentificationController {
 		}
 	}
 
-
+	//connexions admin et employe. Faire la difference entre Admin et un employe normal pour 
+	//savoir quoi ouvrir
 	public void connexionAdmin() throws FileNotFoundException, IOException {
 		String identifiant = tfNumEmploye.getText();
 		String motDePasse = tfMDP.getText();
@@ -226,6 +228,7 @@ public class FenetreIdentificationController {
 		} 
 	}
 
+	// ouvrir la fenetre pour gerer les preposes
 	public void ouvrirVueAdmin() {
 
 		try {

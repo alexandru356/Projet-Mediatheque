@@ -11,7 +11,8 @@ import utils.ValidationIdentification;
 
 public class AjouterAdherent {
 
-
+	//classe pour la fenetre d'ajout d'adherent
+	
 	@FXML
 	TextField tfNom;
 

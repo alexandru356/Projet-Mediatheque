@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 public class ValidationIdentification {
 	
+	//valider l'identification des employes et du admin
 	
 
 	public static boolean verifierId(String identifiant, String motDePasse) throws FileNotFoundException, IOException {
@@ -31,6 +32,8 @@ public class ValidationIdentification {
 		}
 		return false;
 	}
+	
+	//valider le format des num tel.
 	
 	public static boolean verifierFomartTelephone(String telephone) {
 		 String regex = "\\(\\d{3}\\) \\d{3}-\\d{4}";

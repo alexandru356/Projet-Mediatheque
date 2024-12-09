@@ -9,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Livre;
 
+//Lire le fichier avec les livres
+
 public class LivreReader {
 	
 	private LivreReader() {

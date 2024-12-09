@@ -14,6 +14,7 @@ public class GestionnaireDonnee {
 
 	public static void chargerDonnees() {
 		
+		//Se charge des listes deserealisees des donnees de toutes les sortes
 		
 		documentList.addAll(LivreReader.chargerFichier("Livres.txt"));
 		documentList.addAll(DVDReader.chargerFichier("DVD.txt"));
