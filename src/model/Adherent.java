@@ -29,7 +29,7 @@ public class Adherent implements Serializable {
 	private transient StringProperty adresse;
 
 
-
+	//numInscription 
 	public Adherent(String numInscription, String numTelephone, String nom, String prenom, String adresse) {
 		this.nom = new SimpleStringProperty(nom);
 		this.prenom = new SimpleStringProperty(prenom);

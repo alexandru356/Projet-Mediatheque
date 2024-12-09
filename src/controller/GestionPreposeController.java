@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Prepose;
 import utils.GestionSerialisation;
+import utils.GestionnaireDonnee;
 
 public class GestionPreposeController {
 
@@ -46,17 +47,13 @@ public class GestionPreposeController {
 	@FXML
 	TableColumn<Prepose, String> tcTelephone;
 
-	static ObservableList<Prepose> preposeList = FXCollections.observableArrayList();
+	ObservableList<Prepose> preposeList = FXCollections.observableArrayList();
 
 	@FXML
 	public void initialize() {
 
-		preposeList = GestionSerialisation.deserialiserPrepose();
-
-		if (preposeList == null) {
-			preposeList = FXCollections.observableArrayList(); 
-		}
-		System.out.println(preposeList);
+		preposeList = GestionnaireDonnee.preposeList;
+		 
 		tcNumEmp.setCellValueFactory(donnee -> donnee.getValue().numEmpProperty());
 		tcNom.setCellValueFactory(donnee -> donnee.getValue().nomProperty());
 		tcPrenom.setCellValueFactory(donnee -> donnee.getValue().prenomProperty());
@@ -67,9 +64,8 @@ public class GestionPreposeController {
 
 	public static void addPreposeToTable(Prepose prepose) {
 
-		preposeList.add(prepose);
-		GestionSerialisation.serialiserPrepose(preposeList);
-		System.out.println(preposeList);
+		GestionnaireDonnee.preposeList.add(prepose);
+		 GestionSerialisation.serialiserPrepose(GestionnaireDonnee.preposeList);
 	}
 
 	public void supprimerPrepose() {
@@ -102,14 +98,15 @@ public class GestionPreposeController {
 
 
 	public static boolean connexionEmp(String id, String mdp) {
-		for(Prepose p : preposeList) {
+		System.out.println("Prepose List: " + GestionnaireDonnee.preposeList);
+		for(Prepose p : GestionnaireDonnee.preposeList) {
 			if (p.getNumEmp().equals(id) && p.getPasswd().equals(mdp)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public void deconnexion() {
 		try {
 			Stage currentStage = (Stage) btnDeconnexion.getScene().getWindow();

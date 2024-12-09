@@ -19,6 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.Adherent;
 import utils.GestionSerialisation;
+import utils.GestionnaireDonnee;
 
 public class CatalogueLoggedController {
 
@@ -96,7 +97,7 @@ public class CatalogueLoggedController {
 		tvAdherents.setVisible(false);
 	}
 	public static boolean connexionAdhNom(String nom, String prenom) {
-		for(Adherent a : adherentList) {
+		for(Adherent a : GestionnaireDonnee.adherentList) {
 			if (a.getNom().equals(nom) && a.getPrenom().equals(prenom)) {
 				return true;
 			}
@@ -105,7 +106,7 @@ public class CatalogueLoggedController {
 	}
 	
 	public static boolean connexionAdhTel (String tel) {
-		for(Adherent a : adherentList) {
+		for(Adherent a : GestionnaireDonnee.adherentList) {
 			if (a.getNumTelephone().equals(tel)) {
 				return true;
 			}
@@ -130,7 +131,7 @@ public class CatalogueLoggedController {
 	private LivreController livreController;
 	private DVDController dvdController;
 	private PeriodiqueController periodiqueController;
-	static ObservableList<Adherent> adherentList = FXCollections.observableArrayList();
+	ObservableList<Adherent> adherentList = FXCollections.observableArrayList();
 	
 	@FXML
 	public void Effacer () {
@@ -138,21 +139,16 @@ public class CatalogueLoggedController {
 	}
 	
 	public static void addAdherentToTable(Adherent adherent) {
-		adherentList.add(adherent);
-		GestionSerialisation.serealiserAdherent(adherentList);
-		System.out.println(adherentList);
+		GestionnaireDonnee.adherentList.add(adherent);
+		GestionSerialisation.serealiserAdherent(GestionnaireDonnee.adherentList);
 	}
 	
 	@FXML
 	public void initialize() throws IOException {
 		
 		
-		adherentList = GestionSerialisation.deserealiserAdherent();
-		
-		if (adherentList == null) {
-			adherentList = FXCollections.observableArrayList();
-		}
-		
+		adherentList = GestionnaireDonnee.adherentList;
+				
 		tcNumAdherent.setCellValueFactory(cellData -> cellData.getValue().numInscriptionProperty());
 		tcNomAdherent.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
 		tcPrenomAdherent.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
