@@ -10,6 +10,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Adherent implements Serializable {
 
@@ -23,7 +25,6 @@ public class Adherent implements Serializable {
 	private static final int MAX_PERIODIQUES = 1;
 	private static final double AMENDE_PAR_JOUR = 0.50; 
 
-
 	private transient StringProperty numInscription;
 	private transient StringProperty nom;
 	private transient StringProperty prenom;
@@ -31,6 +32,8 @@ public class Adherent implements Serializable {
 	private transient StringProperty adresse;
 	private transient IntegerProperty pretsActifs;
 	private transient DoubleProperty amende;
+
+	private transient ObservableList<Pret> prets;
 
 
 	public Adherent(String numInscription, String numTelephone, String nom, String prenom, String adresse) {
@@ -41,6 +44,7 @@ public class Adherent implements Serializable {
 		this.numInscription = new SimpleStringProperty(numInscription);
 		this.amende = new SimpleDoubleProperty(0.00);
 		this.pretsActifs = new SimpleIntegerProperty(0);
+		this.prets = FXCollections.observableArrayList();
 	}
 
 	private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -66,6 +70,14 @@ public class Adherent implements Serializable {
 	}
 
 
+
+	public void ajouterPret(Pret pret) {
+		this.prets.add(pret);
+	}
+
+	public ObservableList<Pret> getPrets() {
+		return prets;
+	}
 
 	public final DoubleProperty amendeProperty() {
 		return this.amende;

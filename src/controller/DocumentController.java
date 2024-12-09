@@ -110,4 +110,14 @@ public class DocumentController {
 
 		tableViewDocs.setItems(documentsFiltres);
 	}
+
+
+	public void supprimerDocument(Document selectedDocument) {
+		
+		GestionnaireDonnee.documentList.remove(selectedDocument);
+		tableViewDocs.getItems().remove(selectedDocument);
+        tableViewDocs.refresh();
+    }
+		
+	
 }

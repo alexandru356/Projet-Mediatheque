@@ -30,8 +30,6 @@ public class Prepose implements Serializable {
 	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
 		out.defaultWriteObject();
-		System.out.println("Serialisation de: " + getNom());
-
 		out.writeObject(getNom());
 		out.writeObject(getPrenom());
 		out.writeObject(getAdresse());

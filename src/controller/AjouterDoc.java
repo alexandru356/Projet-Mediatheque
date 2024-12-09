@@ -19,6 +19,7 @@ import model.DVD;
 import model.Document;
 import model.Livre;
 import model.Periodique;
+import utils.GestionnaireDonnee;
 
 public class AjouterDoc {
 
@@ -27,11 +28,11 @@ public class AjouterDoc {
 	public void setLivreController(LivreController livreController) {
 		this.livreController = livreController;
 	}
-	
+
 	private DocumentController documentController;
 
 	public void setDocumentController(DocumentController documentController) {
-	    this.documentController = documentController;
+		this.documentController = documentController;
 	}
 	@FXML
 	MenuButton menuBtn;
@@ -56,34 +57,16 @@ public class AjouterDoc {
 
 	@FXML
 	Button btnAnnuler;
-
-
-
+	
 	@FXML
-	private TableView<Livre> livreTableView;
-	//@FXML
-	//private TableView<DVD> dvdTableView;
-	//@FXML
-	//private TableView<Periodique> periodiqueTableView;
-	@FXML
-	private TableView<Document> tousLesDocsTableView;
-
-	//private ObservableList<Periodique> periodiqueList = FXCollections.observableArrayList();
-	//private ObservableList<DVD> dvdList = FXCollections.observableArrayList();
-	private ObservableList<Livre> livreList = FXCollections.observableArrayList();
-	private ObservableList<Document> documentList = FXCollections.observableArrayList();
-
-
+	Button btnConfirmer;
+	
 	private int livreCounter = 10;
-	//private int dvdCounter = 1;
-	//private int periodiqueCounter = 1;
+	private int dvdCounter = 1;
+	private int periodiqueCounter = 1;
 
 	@FXML
 	public void initialize() {
-		//livreTableView.setItems(livreList);
-		//dvdTableView.setItems(dvdList);
-		//periodiqueTableView.setItems(periodiqueList);
-		//tousLesDocsTableView.setItems(documentList);
 		menuBtn.setText("Livre");
 	}
 
@@ -93,16 +76,12 @@ public class AjouterDoc {
 		stage.close();
 	}
 	@FXML
-	private void addDocument() {
-		//String numDoc = 
+	private void ajouterDocument() {
+
 		String titre = tfTitre.getText();
 		String auteur = tfAuteur.getText();
 		String dateStr = tfDate.getText();
 		String motsCles = tfMotsCles.getText();
-
-
-		String selectedType = menuBtn.getText();
-		Document document = null;
 
 		LocalDate date;
 		try {
@@ -114,15 +93,30 @@ public class AjouterDoc {
 			return;
 		}
 
-		String numDocLivre = generateNumDoc();
-		Livre livre = new Livre(numDocLivre, titre, date, auteur, motsCles);
-		if (livreController != null && documentController != null) {
-			livreController.ajouterLivre(livre);
-			documentController.ajouterDocument(livre);
-			livreController.getTableView().refresh();
-			documentController.getTableView().refresh();
-		}
-		clearFields();
+		String selectedType = menuBtn.getText();
+
+		if("Livre".equals(selectedType)) {
+			String numDocLivre = generateNumDoc("Livre");
+			Livre livre = new Livre(numDocLivre, titre, date, auteur, motsCles);
+			GestionnaireDonnee.documentList.add(livre);
+			
+			
+
+	        if (livreController != null) {
+	            livreController.ajouterLivre(livre);
+	            livreController.getTableView().refresh();
+	            
+	        }
+		} else {
+	        // Si aucun type n'est sélectionné
+	        Alert alert = new Alert(Alert.AlertType.WARNING);
+	        alert.setTitle("Erreur");
+	        alert.setContentText("Veuillez sélectionner un type de document dans le menu.");
+	        alert.showAndWait();
+	        return;
+	    }
+		Stage stage = (Stage) btnConfirmer.getScene().getWindow();
+        stage.close();
 	}
 
 	private String generateNumDoc() {
@@ -141,6 +135,15 @@ public class AjouterDoc {
 		tfDate.clear();
 		tfMotsCles.clear();
 	}
-
+	private String generateNumDoc(String type) {
+		if ("Livre".equals(type)) {
+			return "Livre" + livreCounter++;
+		} else if ("DVD".equals(type)) {
+			return "DVD" + dvdCounter++;
+		} else if ("Periodique".equals(type)) {
+			return "Periodique" + periodiqueCounter++;
+		}
+		return "Unknown" + System.currentTimeMillis();
+	}
 }
 

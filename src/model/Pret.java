@@ -3,17 +3,15 @@ package model;
 
 public class Pret {
 	
-	private Adherent adherent;
+    private Document document; 
 
-	
-	public Pret(Adherent adherent) {
-		this.adherent = adherent;
+    public Pret(Document document) {
+        this.document = document;
+    }
 
-	}
-	
-	public Adherent getAdherent() {
-		return adherent;
-	}
-	
+    public Document getDocument() {
+        return document;
+    }
 
+   
 }

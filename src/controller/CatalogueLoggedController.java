@@ -69,6 +69,9 @@ public class CatalogueLoggedController {
 
 	@FXML
 	private Button btnInscrireRetour;
+	
+	@FXML
+	private Button btnSupprimerDoc;
 
 	//Pour la liste des adherents
 	//----------------------------------------------------------------------------------------
@@ -198,7 +201,25 @@ public class CatalogueLoggedController {
 			GestionSerialisation.serealiserAdherent(adherentList);
 		}
 	}
-
+	
+	public void supprimerDocument() {
+		
+		Document selectedDocument = docController.getSelectedDocument();
+		if (selectedDocument != null) {
+			docController.supprimerDocument(selectedDocument);
+			livreController.supprimerDocument(selectedDocument);
+			dvdController.supprimerDocument(selectedDocument);
+			periodiqueController.supprimerDocument(selectedDocument);
+		} else {
+			// Message si aucun document n'est sélectionné
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Avertissement");
+			alert.setHeaderText("Aucun document sélectionné");
+			alert.setContentText("Veuillez sélectionner un document à supprimer.");
+			alert.showAndWait();
+		}
+	}
+	
 	private void mettreAJourAdherent(Adherent updatedAdherent) {
 		for (int i = 0; i < GestionnaireDonnee.adherentList.size(); i++) {
 			Adherent adherent = GestionnaireDonnee.adherentList.get(i);
@@ -374,7 +395,7 @@ public class CatalogueLoggedController {
 				alert.setContentText("Ce document est déjà emprunté. Veuillez en choisir un autre.");
 				alert.showAndWait();
 			} else {
-			
+
 				try {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Pret.fxml"));
 					Parent root = loader.load();
@@ -409,16 +430,19 @@ public class CatalogueLoggedController {
 	@FXML
 	private void inscrireRetour() {
 		Document selectedDocument = docController.getSelectedDocument();
+
 		if (selectedDocument != null) {
+
+			String nomEmprunteur = selectedDocument.getNomEmprunteur();
 			if (selectedDocument.getNomEmprunteur() != null) {
 
 				selectedDocument.setNomEmprunteur(null);
-
 				selectedDocument.setEstEmprunte(false);
+				
 				for (Adherent adherent : GestionnaireDonnee.adherentList) {
-					if (adherent.getNom().equals(selectedDocument.getNomEmprunteur())) {
-
+					if (nomEmprunteur.contains(adherent.getNom())) {
 						adherent.setPretsActifs(adherent.getPretsActifs() - 1);  
+						
 						break;
 					}
 				}

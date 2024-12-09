@@ -15,7 +15,8 @@ import javafx.beans.property.StringProperty;
 public class Document implements java.io.Serializable {
 
 
-	//private static final long serialVersionUID = 1L;
+
+	//private static final long serialVersionUID = -9141208820268956839L;
 	private StringProperty numDoc;
 	private StringProperty titre;
 	private IntegerProperty nbPrets;

@@ -91,5 +91,11 @@ public class LivreController {
 
 		tableViewLivres.setItems(livresFiltres);
 	}
+	public void supprimerDocument(Document selectedDocument) {
+		
+		GestionnaireDonnee.documentList.remove(selectedDocument);
+		tableViewLivres.getItems().remove(selectedDocument);
+		tableViewLivres.refresh();
+	}
 
 }

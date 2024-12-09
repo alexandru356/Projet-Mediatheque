@@ -88,5 +88,11 @@ public class DVDController {
 	public TableView<DVD> getTableView() {
 		return tableViewDvd;
 	}
+	public void supprimerDocument(Document selectedDocument) {
+		
+		GestionnaireDonnee.documentList.remove(selectedDocument);
+		tableViewDvd.getItems().remove(selectedDocument);
+		dvdList.remove(selectedDocument);
+	}
 }
 

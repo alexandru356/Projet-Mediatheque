@@ -94,4 +94,10 @@ public class PeriodiqueController {
 	public TableView<Periodique> getTableView() {
 		return tableViewPeriodique;
 	}
+	public void supprimerDocument(Document selectedDocument) {
+		
+		GestionnaireDonnee.documentList.remove(selectedDocument);
+		tableViewPeriodique.getItems().remove(selectedDocument);
+		tableViewPeriodique.refresh();
+	}
 }

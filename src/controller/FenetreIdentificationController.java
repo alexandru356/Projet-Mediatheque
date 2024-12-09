@@ -135,8 +135,7 @@ public class FenetreIdentificationController {
 			
 			Boolean adherentValid = CatalogueLoggedController.connexionAdhNom(nom, prenom);
 			
-			//Pour faire des tests
-			//System.out.print("nom : ." + nom + ".");
+
 			
 			
 			//Gerer les messages d'erreurs different et si le login est bon

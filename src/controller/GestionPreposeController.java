@@ -1,12 +1,6 @@
 package controller;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +13,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Prepose;
 import utils.GestionSerialisation;
@@ -98,7 +91,7 @@ public class GestionPreposeController {
 
 
 	public static boolean connexionEmp(String id, String mdp) {
-		System.out.println("Prepose List: " + GestionnaireDonnee.preposeList);
+	
 		for(Prepose p : GestionnaireDonnee.preposeList) {
 			if (p.getNumEmp().equals(id) && p.getPasswd().equals(mdp)) {
 				return true;
