@@ -3,6 +3,7 @@ package utils;
 import javafx.collections.ObservableList;
 import model.Periodique;
 
+//classe de tests pas importante a la correction
 
 public class TestPeriodiqueReader {
 	public static void main(String[] args) {

@@ -23,6 +23,8 @@ import model.Livre;
 import utils.ValidationIdentification;
 
 public class CatalogueController {
+	
+	//controlleur pour MainView.fxml, la fenetre du catalogue non connectee
 
 	@FXML
 	private RadioButton rdAuteur;
@@ -112,6 +114,8 @@ public class CatalogueController {
 	public void Effacer () {
 		tfRecherche.clear();
 	}
+	
+	//identification par nom/prenom ou telephone
 
 	public void TypeIdentification () {
 		if (rdIdentificationNom.isSelected()) {
@@ -162,10 +166,6 @@ public class CatalogueController {
 
 			Boolean adherentValid = CatalogueLoggedController.connexionAdhNom(nom, prenom);
 
-			//Pour faire des tests
-			//System.out.print("nom : ." + nom + ".");
-
-
 			//Gerer les messages d'erreurs different et si le login est bon
 			if(nom == "") {
 
@@ -215,10 +215,7 @@ public class CatalogueController {
 		}
 
 	}
-
-	public CatalogueController () {
-
-	}
+	
 	public void getSelectedDocument() {
 		Document selectedDocument = docController.getSelectedDocument();
 		if (selectedDocument != null) {

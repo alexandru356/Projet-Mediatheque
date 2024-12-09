@@ -9,6 +9,8 @@ import utils.GestionSerialisation;
 
 public class ModifierAdherent {
 
+	//changer les proprietees d'un adherent
+	
 	@FXML
 	TextField tfAdresse;
 

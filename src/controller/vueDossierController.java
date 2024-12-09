@@ -19,6 +19,8 @@ import model.Pret;
 
 public class vueDossierController {
 
+	//Vue pour le dossier des adherent
+	
 	@FXML
 	private TableView<Document> tvDocInfo;
 

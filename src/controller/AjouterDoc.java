@@ -22,6 +22,8 @@ import model.Periodique;
 import utils.GestionnaireDonnee;
 
 public class AjouterDoc {
+	
+	//classe pour la fenetre d'ajout de document
 
 	private LivreController livreController;
 
@@ -75,6 +77,7 @@ public class AjouterDoc {
 		Stage stage = (Stage) btnAnnuler.getScene().getWindow();
 		stage.close();
 	}
+	
 	@FXML
 	private void ajouterDocument() {
 

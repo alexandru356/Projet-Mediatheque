@@ -17,6 +17,7 @@ import model.Prepose;
 
 public class GestionSerialisation {
 
+	//se charge de la serealisation et deserealisation de toutes les donnees
 
 	private static final String FILE_LIVRES = "livres.ser";
 	private static final String FILE_DVDS = "dvds.ser";

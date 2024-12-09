@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Periodique;
 
+//Lire le fichier avec les periodiques
+
 public class PeriodiqueReader {
 
 	private PeriodiqueReader() {
