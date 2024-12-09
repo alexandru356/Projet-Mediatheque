@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
+	<!-- TODO Add Nodes -->
+	<TableView fx:id="tvAdherents" layoutX="1.0" prefHeight="796.0" prefWidth="1251.0" visible="false">
+              <columns>
+                <TableColumn fx:id="tcNumAdherent" prefWidth="114.0" text="Numero adherent" />
+                <TableColumn fx:id="tcNomAdherent" prefWidth="179.0" text="Nom" />
+                  <TableColumn fx:id="tcPrenomAdherent" prefWidth="197.0" text="Prenom" />
+                  <TableColumn fx:id="tcAdresse" prefWidth="417.0" text="Adresse" />
+                  <TableColumn fx:id="tcTelephoneAdherent" prefWidth="151.0" text="Telephone" />
+                  <TableColumn fx:id="tcPretActifs" prefWidth="121.0" text="Prets actifs" />
+                  <TableColumn fx:id="tcSoldeDu" prefWidth="71.0" text="Solde du" />
+              </columns>
+            </TableView>
+</AnchorPane>
+

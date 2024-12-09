@@ -7,6 +7,7 @@ import controller.LivreController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import utils.GestionnaireDonnee;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -14,6 +15,10 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+	    GestionnaireDonnee.chargerDonnees();
+	    System.out.println("Preposes loaded: " + GestionnaireDonnee.preposeList);
+	    
 	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueIdentification.fxml"));		
 		
 	    LivreController livreController = new LivreController();
@@ -22,6 +27,7 @@ public class Main extends Application {
 	    
 	    ajouterDoc.setLivreController(livreController);
 	    ajouterDoc.setDocumentController(documentController);
+	    
 	    
 	    
 	    Parent root = loader.load();
