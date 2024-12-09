@@ -10,9 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import model.Adherent;
 
 public class CatalogueLoggedController {
 
@@ -45,6 +48,43 @@ public class CatalogueLoggedController {
 
 	@FXML
 	private Tab tabPeriodiques;
+	
+	//Pour la liste des adherents
+	//----------------------------------------------------------------------------------------
+	
+	@FXML
+	TableView<Adherent> tvAdherents;
+	
+	@FXML
+	TableColumn<Adherent, String> tcNumAdherent;
+	
+	@FXML
+	TableColumn<Adherent, String> tcNomAdherent;
+	
+	@FXML
+	TableColumn<Adherent, String> tcPrenomAdherent;
+	
+	@FXML
+	TableColumn<Adherent, String> tcAdresse;
+	
+	@FXML
+	TableColumn<Adherent, String> tcTelephoneAdherent;
+	
+	@FXML
+	TableColumn<Adherent, Integer> tcPretActifs;
+	
+	@FXML
+	TableColumn<Adherent, String> tcSoldeDu;
+	
+	public void afficherListeAdherents() {
+		tvAdherents.setVisible(true);
+	}
+	
+	public void cacherListeAdherent() {
+		tvAdherents.setVisible(false);
+	}
+	
+	//----------------------------------------------------------------------------------------	
 	
 	private DocumentController docController;
 	private LivreController livreController;
