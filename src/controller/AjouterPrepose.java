@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -9,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Prepose;
+import utils.ValidationIdentification;
 
 public class AjouterPrepose {
 
@@ -27,7 +27,7 @@ public class AjouterPrepose {
 	@FXML
 	Button btnAnnuler;
 
-	public static int counter = 20001;
+	private static int counter = 20001;
 	
 	
 	public void annuler() {
@@ -37,8 +37,7 @@ public class AjouterPrepose {
 
 	@FXML
 	private void confirmerAjout() {
-		//a enelever
-		Pattern pattern = Pattern.compile("\\(\\d{3}\\) \\d{3}-\\d{4}");
+		
 		while(true) {
 			String numEmp = "P" + counter++;
 			String nom = tfNom.getText().trim();
@@ -46,12 +45,12 @@ public class AjouterPrepose {
 			String adresse = tfAdresse.getText().trim();
 			String numTel = tfTelephone.getText().trim();
 			String passwd = tfMDP.getText().trim();
-			boolean numTelValid = pattern.matcher(numTel).matches();
+			
 			boolean toutRempli = !nom.isEmpty() && !prenom.isEmpty() && !adresse.isEmpty() && !numTel.isEmpty()
 					&& !passwd.isEmpty();
 
 
-			if(numTelValid && toutRempli) {
+			if(toutRempli && ValidationIdentification.verifierFomartTelephone(numTel)) {
 
 				Prepose p = new Prepose(numEmp,nom,prenom,adresse,numTel,passwd);
 				GestionPreposeController.addPreposeToTable(p);

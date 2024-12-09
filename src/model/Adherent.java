@@ -14,8 +14,8 @@ import javafx.beans.property.StringProperty;
 public class Adherent implements Serializable {
 
 	private static final long serialVersionUID = -2938596194237212317L;
-	private transient StringProperty numInscription;
-	private transient DoubleProperty amende;
+
+
 
 	//Constantes pour les limites de l'adhérent
 	private static final int MAX_LIVRES = 3;
@@ -23,37 +23,46 @@ public class Adherent implements Serializable {
 	private static final int MAX_PERIODIQUES = 1;
 	private static final double AMENDE_PAR_JOUR = 0.50; 
 
+
+	private transient StringProperty numInscription;
 	private transient StringProperty nom;
 	private transient StringProperty prenom;
 	private transient StringProperty numTelephone;
 	private transient StringProperty adresse;
+	private transient IntegerProperty pretsActifs;
+	private transient DoubleProperty amende;
 
 
-	//numInscription 
 	public Adherent(String numInscription, String numTelephone, String nom, String prenom, String adresse) {
 		this.nom = new SimpleStringProperty(nom);
 		this.prenom = new SimpleStringProperty(prenom);
 		this.numTelephone = new SimpleStringProperty(numTelephone);
 		this.adresse = new SimpleStringProperty(adresse);
 		this.numInscription = new SimpleStringProperty(numInscription);
-		this.amende = new SimpleDoubleProperty(0.0);
+		this.amende = new SimpleDoubleProperty(0.00);
+		this.pretsActifs = new SimpleIntegerProperty(0);
 	}
 
 	private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-        out.defaultWriteObject();
-        System.out.println("Serialisation de: " + getNom());
-        out.writeObject(getNom());
-        out.writeObject(getPrenom());
-        out.writeObject(getNumTelephone());
-        out.writeObject(getAdresse());
-    }
-	
+		out.defaultWriteObject();  
+		out.writeObject(getNumInscription());  
+		out.writeObject(getNom());
+		out.writeObject(getPrenom());
+		out.writeObject(getNumTelephone());
+		out.writeObject(getAdresse());
+		out.writeObject(getAmende());
+		out.writeObject(getPretsActifs());
+	}
+
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-		in.defaultReadObject();
+		in.defaultReadObject();  
+		numInscription = new SimpleStringProperty((String) in.readObject());
 		nom = new SimpleStringProperty((String) in.readObject());
 		prenom = new SimpleStringProperty((String) in.readObject());
-		adresse = new SimpleStringProperty((String) in.readObject());
 		numTelephone = new SimpleStringProperty((String) in.readObject());
+		adresse = new SimpleStringProperty((String) in.readObject());
+		amende = new SimpleDoubleProperty((Double) in.readObject());
+		pretsActifs = new SimpleIntegerProperty((Integer) in.readObject());
 	}
 
 
@@ -175,11 +184,6 @@ public class Adherent implements Serializable {
 	}
 
 
-
-
-
-
-
 	public final String getNumInscription() {
 		return this.numInscriptionProperty().get();
 	}
@@ -193,6 +197,21 @@ public class Adherent implements Serializable {
 	public final void setNumInscription(final String numInscription) {
 		this.numInscriptionProperty().set(numInscription);
 	}
+
+	public final IntegerProperty pretsActifsProperty() {
+		return this.pretsActifs;
+	}
+
+
+	public final int getPretsActifs() {
+		return this.pretsActifsProperty().get();
+	}
+
+
+	public final void setPretsActifs(final int pretsActifs) {
+		this.pretsActifsProperty().set(pretsActifs);
+	}
+
 
 
 

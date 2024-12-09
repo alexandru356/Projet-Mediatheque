@@ -11,6 +11,7 @@ import model.Document;
 import model.Livre;
 import model.Periodique;
 import utils.DVDReader;
+import utils.GestionnaireDonnee;
 import utils.LivreReader;
 import utils.PeriodiqueReader;
 
@@ -42,95 +43,69 @@ public class DocumentController {
 
 	private ObservableList<Document> lstObsDoc = FXCollections.observableArrayList();
 
-	public DocumentController () {
-		ObservableList<DVD> listeDVDs = FXCollections.observableArrayList(DVDReader.chargerFichier("DVD.txt"));
-		ObservableList<Livre> listeLivres = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
-		ObservableList<Periodique> listePeriodiques = FXCollections.observableArrayList(PeriodiqueReader.chargerFichier("Periodiques.txt"));
-		lstObsDoc.addAll(listeDVDs);
-		lstObsDoc.addAll(listeLivres);
-		lstObsDoc.addAll(listePeriodiques);
+	public Document getSelectedDocument() {
+		return tableViewDocs.getSelectionModel().getSelectedItem();
 	}
+
+
 	public void ajouterDocument(Document document) {
-		lstObsDoc.add(document); 
+		GestionnaireDonnee.documentList.add(document);
 		tableViewDocs.refresh(); 
 	}
-	
+
 	public ObservableList<Document> getObservableList() {
-	    return lstObsDoc;
+		return lstObsDoc;
 	}
 	public TableView<Document> getTableView() {
-	    return tableViewDocs;
+		return tableViewDocs;
 	}
 
 	@FXML
 	public void initialize() {
+
+		
+		lstObsDoc = GestionnaireDonnee.documentList;
 		tableViewDocs.setItems(lstObsDoc);
 
 		colNumDoc.setCellValueFactory(donnee -> donnee.getValue().numDocProperty());
 		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
 		colAuteur.setCellValueFactory(donnee -> {
 			Document doc = donnee.getValue();
-
 			if (doc instanceof Livre) {
 				return ((Livre) doc).auteurProperty();
-			}else if(doc instanceof DVD) {
+			} else if (doc instanceof DVD) {
 				return ((DVD) doc).realisateurProperty();
-			}else {
-				return null;
 			}
+			return null;
 		});
 		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
 		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nomEmprunteurProperty());
 	}
-
 	public void filtrerDocuments(String texte, String filtreActif) {
 		ObservableList<Document> documentsFiltres = FXCollections.observableArrayList();
 
-		for (Document doc : lstObsDoc) {
-
+		for (Document doc : GestionnaireDonnee.documentList) {
 			if (filtreActif.equals("titre") && doc.getTitre().toLowerCase().contains(texte.toLowerCase())) {
 				documentsFiltres.add(doc);
-			} 
-
-			else if (filtreActif.equals("auteur")) {
-				if (doc instanceof Livre) {
-					Livre livre = (Livre) doc;
-					if (livre.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
-						documentsFiltres.add(livre);
-					}
-				} else if (doc instanceof Periodique) {
-					Periodique periodique = (Periodique) doc;
-					if (periodique.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
-						documentsFiltres.add(periodique);
-					}
-				} else if (doc instanceof DVD) {
-					DVD dvd = (DVD) doc;
-					if (dvd.getRealisateur().toLowerCase().contains(texte.toLowerCase())) {
-						documentsFiltres.add(dvd);
-					}
+			} else if (filtreActif.equals("auteur")) {
+				if (doc instanceof Livre && ((Livre) doc).getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(doc);
+				} else if (doc instanceof Periodique && ((Periodique) doc).getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(doc);
+				} else if (doc instanceof DVD && ((DVD) doc).getRealisateur().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(doc);
+				}
+			} else if (filtreActif.equals("motCle")) {
+				if (doc instanceof Livre && ((Livre) doc).getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(doc);
+				} else if (doc instanceof Periodique && ((Periodique) doc).getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(doc);
+				} else if (doc instanceof DVD && ((DVD) doc).getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+					documentsFiltres.add(doc);
 				}
 			}
-			else if (filtreActif.equals("motCle")) {
-				if (doc instanceof DVD) {
-					DVD dvd = (DVD) doc;
-					if (dvd.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
-						documentsFiltres.add(dvd);
-					}
-				}if (doc instanceof Livre) {
-					Livre livre = (Livre) doc;
-					if (livre.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
-						documentsFiltres.add(livre);
-					}
-				}if (doc instanceof Periodique) {
-					Periodique periodique = (Periodique) doc;
-					if (periodique.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
-						documentsFiltres.add(periodique);
-					}
-				}
-			}
-
 		}
 
 		tableViewDocs.setItems(documentsFiltres);

@@ -53,7 +53,7 @@ public class GestionPreposeController {
 	public void initialize() {
 
 		preposeList = GestionnaireDonnee.preposeList;
-		 
+
 		tcNumEmp.setCellValueFactory(donnee -> donnee.getValue().numEmpProperty());
 		tcNom.setCellValueFactory(donnee -> donnee.getValue().nomProperty());
 		tcPrenom.setCellValueFactory(donnee -> donnee.getValue().prenomProperty());
@@ -65,7 +65,7 @@ public class GestionPreposeController {
 	public static void addPreposeToTable(Prepose prepose) {
 
 		GestionnaireDonnee.preposeList.add(prepose);
-		 GestionSerialisation.serialiserPrepose(GestionnaireDonnee.preposeList);
+		GestionSerialisation.serialiserPrepose(GestionnaireDonnee.preposeList);
 	}
 
 	public void supprimerPrepose() {

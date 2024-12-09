@@ -219,16 +219,12 @@ public class FenetreIdentificationController {
 			ouvrirVueAdmin();
 			tfNumEmploye.clear();
 			tfMDP.clear();
-		} else {
-			System.err.println("Identifiants invalide");
-		}
+		} 
 		if(idValideEmp) {
 			ouvrirVueEmploye();
             tfNumEmploye.clear();
             tfMDP.clear();
-		} else {
-			System.err.println("Identifiants employé invalide");
-		}
+		} 
 	}
 
 	public void ouvrirVueAdmin() {

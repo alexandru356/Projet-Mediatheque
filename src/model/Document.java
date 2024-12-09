@@ -12,9 +12,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Document {
+public class Document implements java.io.Serializable {
 
 
+	//private static final long serialVersionUID = 1L;
 	private StringProperty numDoc;
 	private StringProperty titre;
 	private IntegerProperty nbPrets;
@@ -28,9 +29,32 @@ public class Document {
 		this.nbPrets = new SimpleIntegerProperty(nbPrets);
 		this.datePublication = new SimpleObjectProperty<>(LocalDate.parse(datePublication));
 		this.estEmprunte = new SimpleBooleanProperty(false);
-		this.nomEmprunteur = new SimpleStringProperty("testEmprunteur");
+		this.nomEmprunteur = new SimpleStringProperty(" ");
 	}
-
+	
+	
+	private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+		out.defaultWriteObject();
+		out.writeObject(numDoc.get());  
+	    out.writeObject(titre.get());
+	    out.writeObject(nbPrets.get());
+	    out.writeObject(datePublication.get());
+	    out.writeObject(estEmprunte.get());
+	    out.writeObject(nomEmprunteur.get());
+	}
+	
+	private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+		in.defaultReadObject();
+		numDoc = new SimpleStringProperty((String) in.readObject());
+		titre = new SimpleStringProperty((String) in.readObject());
+		nbPrets = new SimpleIntegerProperty((int) in.readObject());
+		datePublication = new SimpleObjectProperty<>((LocalDate) in.readObject());
+		estEmprunte = new SimpleBooleanProperty((boolean) in.readObject());
+		nomEmprunteur = new SimpleStringProperty((String) in.readObject());
+	}
+	
+	
+	
 	public BooleanProperty estEmprunteProperty() {
 		return this.estEmprunte;
 	}
@@ -40,7 +64,10 @@ public class Document {
 	}
 
 	public void setEstEmprunte(boolean estEmprunte) {
-		this.estEmprunte.set(estEmprunte);
+	    this.estEmprunte.set(estEmprunte);
+	    if (!estEmprunte) {
+	        this.nomEmprunteur.set("");  
+	    }
 	}
 
 	public StringProperty etatProperty() {
@@ -119,8 +146,11 @@ public class Document {
 	}
 	
 
-	public final void setNomEmprunteur(final String nomEmprunteur) {
-		this.nomEmprunteurProperty().set(nomEmprunteur);
+	public void setNomEmprunteur(String nomEmprunteur) {
+	    this.nomEmprunteur.set(nomEmprunteur);
+	    if (nomEmprunteur != null && !nomEmprunteur.isEmpty()) {
+	        this.estEmprunte.set(true); 
+	    }
 	}
 	
 

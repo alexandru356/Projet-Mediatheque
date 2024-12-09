@@ -11,7 +11,6 @@ public class Prepose implements Serializable {
 	
 	private static final long serialVersionUID = -2938596194237243687L;
 
-	private transient StringProperty id;
 	private transient StringProperty nom;
 	private transient StringProperty prenom;
 	private transient StringProperty numTelephone;
@@ -24,7 +23,6 @@ public class Prepose implements Serializable {
 		this.prenom = new SimpleStringProperty(prenom);
 		this.adresse = new SimpleStringProperty(adresse);
 		this.numTelephone = new SimpleStringProperty(numTelephone);
-		this.id = new SimpleStringProperty(UUID.randomUUID().toString());
 		this.numEmp = new SimpleStringProperty(numEmp);
 		this.passwd = new SimpleStringProperty(passwd);
 	}
@@ -44,7 +42,6 @@ public class Prepose implements Serializable {
 
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
-		//System.out.println("Deserialisation de: " + getNom());
 		nom = new SimpleStringProperty((String) in.readObject());
 		prenom = new SimpleStringProperty((String) in.readObject());
 		adresse = new SimpleStringProperty((String) in.readObject());
@@ -53,20 +50,7 @@ public class Prepose implements Serializable {
 		passwd = new SimpleStringProperty((String) in.readObject());
 	}
 
-	public final StringProperty idProperty() {
-		return this.id;
-	}
-	
 
-	public final String getId() {
-		return this.idProperty().get();
-	}
-	
-
-	public final void setId(final String id) {
-		this.idProperty().set(id);
-	}
-	
 
 	public final StringProperty nomProperty() {
 		return this.nom;

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.Adherent;
+import model.Document;
 import utils.GestionSerialisation;
 import utils.GestionnaireDonnee;
 
@@ -28,25 +30,27 @@ public class CatalogueLoggedController {
 
 	@FXML
 	private RadioButton rdMotCle;
-	
+
 	@FXML
 	private Button btnEffacer;
-	
+
 	@FXML
 	private Button btnAjouterAdherent;
-	
+
 	@FXML
 	private Button btnAjouterDoc;
-	
+
+	@FXML
+	private Button btnPayer;
+
 	@FXML
 	private Button btnDeconnexion;
 
 	@FXML
 	private TextField tfRecherche;
-	
+
 	@FXML
 	private TabPane tabPane;
-	
 
 	@FXML
 	private Tab tabTousLesDocuments;
@@ -59,40 +63,46 @@ public class CatalogueLoggedController {
 
 	@FXML
 	private Tab tabPeriodiques;
-	
+
+	@FXML
+	private Button btnInscrirePret;
+
+	@FXML
+	private Button btnInscrireRetour;
+
 	//Pour la liste des adherents
 	//----------------------------------------------------------------------------------------
-	
+
 	@FXML
 	TableView<Adherent> tvAdherents;
-	
+
 	@FXML
 	TableColumn<Adherent, String> tcNumAdherent;
-	
+
 	@FXML
 	TableColumn<Adherent, String> tcNomAdherent;
-	
+
 	@FXML
 	TableColumn<Adherent, String> tcPrenomAdherent;
-	
+
 	@FXML
 	TableColumn<Adherent, String> tcAdresse;
-	
+
 	@FXML
 	TableColumn<Adherent, String> tcTelephoneAdherent;
-	
+
 	@FXML
 	TableColumn<Adherent, Integer> tcPretActifs;
-	
+
 	@FXML
-	TableColumn<Adherent, String> tcSoldeDu;
-	
-	
-	
+	TableColumn<Adherent, Double> tcSoldeDu;
+
+
+
 	public void afficherListeAdherents() {
 		tvAdherents.setVisible(true);
 	}
-	
+
 	public void cacherListeAdherent() {
 		tvAdherents.setVisible(false);
 	}
@@ -104,7 +114,7 @@ public class CatalogueLoggedController {
 		}
 		return false;
 	}
-	
+
 	public static boolean connexionAdhTel (String tel) {
 		for(Adherent a : GestionnaireDonnee.adherentList) {
 			if (a.getNumTelephone().equals(tel)) {
@@ -113,61 +123,137 @@ public class CatalogueLoggedController {
 		}	
 		return false;
 	}
-	
+
 	public void modifierAdherent() {
-		//TODO
+
+		Adherent selectedAdherent = tvAdherents.getSelectionModel().getSelectedItem();
+
+		if (selectedAdherent != null) {
+			try {
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModifierAdherent.fxml"));
+				Parent root = loader.load();
+
+
+				ModifierAdherent controller = loader.getController();
+				controller.setAdherent(selectedAdherent);
+
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root));
+				stage.setTitle("Modifier Adherent");
+				stage.showAndWait();
+
+				mettreAJourAdherent(selectedAdherent);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			// Show a warning if no adherent is selected
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Avertissement");
+			alert.setHeaderText("Aucun adhérent sélectionné");
+			alert.setContentText("Veuillez sélectionner un adhérent à modifier.");
+			alert.showAndWait();
+		}
 	}
-	
+
 	public void payerSolde() {
-		//TODO
+		Adherent selectedAdherent = tvAdherents.getSelectionModel().getSelectedItem();
+
+		if(selectedAdherent != null) {
+
+			if(selectedAdherent.getAmende() > 0) {
+
+				selectedAdherent.setAmende(0);
+				mettreAJourAdherent(selectedAdherent);
+
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setTitle("Paiement effectué");
+				alert.setHeaderText(null);
+				alert.setContentText("Le solde a été réglé. Le solde est maintenant à 0 $.");
+				alert.showAndWait();
+			}  else {
+				// Si aucun solde à payer, affiche un message
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setTitle("Aucun solde à payer");
+				alert.setHeaderText(null);
+				alert.setContentText("Il n'y a aucun solde à payer.");
+				alert.showAndWait();
+			}
+		} else {
+			// Si aucun adhérent n'est sélectionné, affiche un message d'erreur
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Avertissement");
+			alert.setHeaderText("Aucun adhérent sélectionné");
+			alert.setContentText("Veuillez sélectionner un adhérent pour procéder au paiement.");
+			alert.showAndWait();
+		}
 	}
-	
+
 	public void supprimerAdherent() {
-		//TODO
+
+		Adherent adherent = tvAdherents.getSelectionModel().getSelectedItem();
+		if (adherent != null) {
+			adherentList.remove(adherent);
+			GestionSerialisation.serealiserAdherent(adherentList);
+		}
+	}
+
+	private void mettreAJourAdherent(Adherent updatedAdherent) {
+		for (int i = 0; i < GestionnaireDonnee.adherentList.size(); i++) {
+			Adherent adherent = GestionnaireDonnee.adherentList.get(i);
+			//fix num inscript null error
+			if (adherent.getNumInscription().equals(updatedAdherent.getNumInscription())) {
+				GestionnaireDonnee.adherentList.set(i, updatedAdherent);
+				break;
+			}
+		}
+
+		GestionSerialisation.serealiserAdherent(GestionnaireDonnee.adherentList);
+
+		tvAdherents.setItems(FXCollections.observableArrayList(GestionnaireDonnee.adherentList));
+		tvAdherents.refresh();
 	}
 	//----------------------------------------------------------------------------------------	
-	
+
 	private DocumentController docController;
 	private LivreController livreController;
 	private DVDController dvdController;
 	private PeriodiqueController periodiqueController;
 	ObservableList<Adherent> adherentList = FXCollections.observableArrayList();
-	
+
 	@FXML
 	public void Effacer () {
 		tfRecherche.clear();
 	}
-	
-	public static void addAdherentToTable(Adherent adherent) {
-		GestionnaireDonnee.adherentList.add(adherent);
-		GestionSerialisation.serealiserAdherent(GestionnaireDonnee.adherentList);
-	}
-	
+
 	@FXML
 	public void initialize() throws IOException {
-		
-		
+
+
 		adherentList = GestionnaireDonnee.adherentList;
-				
-		tcNumAdherent.setCellValueFactory(cellData -> cellData.getValue().numInscriptionProperty());
-		tcNomAdherent.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
-		tcPrenomAdherent.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
-		tcAdresse.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
-		tcTelephoneAdherent.setCellValueFactory(cellData -> cellData.getValue().numTelephoneProperty());
+
+		tcNumAdherent.setCellValueFactory(donnee -> donnee.getValue().numInscriptionProperty());
+		tcNomAdherent.setCellValueFactory(donnee -> donnee.getValue().nomProperty());
+		tcPrenomAdherent.setCellValueFactory(donnee -> donnee.getValue().prenomProperty());
+		tcAdresse.setCellValueFactory(donnee -> donnee.getValue().adresseProperty());
+		tcTelephoneAdherent.setCellValueFactory(donnee -> donnee.getValue().numTelephoneProperty());
+		tcPretActifs.setCellValueFactory(donnee -> donnee.getValue().pretsActifsProperty().asObject());
+		tcSoldeDu.setCellValueFactory(donnee -> donnee.getValue().amendeProperty().asObject());
 		tvAdherents.setItems(adherentList);
-		
-		
+
+
 		ToggleGroup group1 = new ToggleGroup();
 		rdAuteur.setToggleGroup(group1);
 		rdMotCle.setToggleGroup(group1);
 
 		rdAuteur.setSelected(true);
-		
-		
+
+
 		group1.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
 			rechercherDansTousLesTabs(tfRecherche.getText());
 		});
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VueDoc.fxml"));
 		Parent root = loader.load();
 		docController = loader.getController();
@@ -199,12 +285,17 @@ public class CatalogueLoggedController {
 				rdAuteur.setDisable(false);
 			}
 		});
-		
-		
-		
+		tfRecherche.textProperty().addListener((observable, oldText, newText) -> {
+			rechercherDansTousLesTabs(newText);
+		});
+
+
 	}
-	
-	
+	public static void addAdherentToTable(Adherent adherent) {
+		GestionnaireDonnee.adherentList.add(adherent);
+		GestionSerialisation.serealiserAdherent(GestionnaireDonnee.adherentList);
+	}
+
 	public void deconnexion() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueIdentification.fxml"));
@@ -219,9 +310,9 @@ public class CatalogueLoggedController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void AjoutAdherent() {
-		
+
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AjoutAdherent.fxml"));
 			Parent root = loader.load();
@@ -234,7 +325,7 @@ public class CatalogueLoggedController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void rechercherDansTousLesTabs(String texte) {
 
 		String filtreActif = getFiltreActif();
@@ -244,8 +335,8 @@ public class CatalogueLoggedController {
 		dvdController.filtrerDocuments(texte,filtreActif);
 		periodiqueController.filtrerDocuments(texte,filtreActif);
 	}
-	
-	
+
+
 	private String getFiltreActif() {
 		if (rdAuteur.isSelected()) {
 			return "auteur";
@@ -254,7 +345,7 @@ public class CatalogueLoggedController {
 		}
 		return "";
 	}
-	
+
 	@FXML
 	private void ajouterDoc() {
 		try {
@@ -267,6 +358,82 @@ public class CatalogueLoggedController {
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void inscrirePret() {
+
+
+		Document selectedDocument = docController.getSelectedDocument();
+		if (selectedDocument != null) {
+			if (selectedDocument.isEstEmprunte()) {
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setTitle("Avertissement");
+				alert.setHeaderText("Document déjà emprunté");
+				alert.setContentText("Ce document est déjà emprunté. Veuillez en choisir un autre.");
+				alert.showAndWait();
+			} else {
+			
+				try {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Pret.fxml"));
+					Parent root = loader.load();
+					PretController pretController = loader.getController();
+
+					pretController.setDocumentSelect(selectedDocument);
+					selectedDocument.setEstEmprunte(true);  
+					selectedDocument.setNomEmprunteur(null); 
+					docController.getTableView().refresh();
+					livreController.getTableView().refresh();
+					dvdController.getTableView().refresh();
+					periodiqueController.getTableView().refresh();
+					Scene scene = new Scene(root);
+					Stage stage = new Stage();
+					stage.setScene(scene);
+					stage.setTitle("Inscrire un prêt");
+					stage.show();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}else {
+			// Message si aucun document n'est sélectionné
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Avertissement");
+			alert.setHeaderText("Aucun document sélectionné");
+			alert.setContentText("Veuillez sélectionner un document à emprunter.");
+			alert.showAndWait();
+		}
+	}
+
+	@FXML
+	private void inscrireRetour() {
+		Document selectedDocument = docController.getSelectedDocument();
+		if (selectedDocument != null) {
+			if (selectedDocument.getNomEmprunteur() != null) {
+
+				selectedDocument.setNomEmprunteur(null);
+
+				selectedDocument.setEstEmprunte(false);
+				for (Adherent adherent : GestionnaireDonnee.adherentList) {
+					if (adherent.getNom().equals(selectedDocument.getNomEmprunteur())) {
+
+						adherent.setPretsActifs(adherent.getPretsActifs() - 1);  
+						break;
+					}
+				}
+				docController.getTableView().refresh();
+				livreController.getTableView().refresh();
+				dvdController.getTableView().refresh();
+				periodiqueController.getTableView().refresh();
+			} else {
+				// Message si aucun document n'est sélectionné
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setTitle("Avertissement");
+				alert.setHeaderText("Aucun document sélectionné");
+				alert.setContentText("Veuillez sélectionner un document à retourner.");
+				alert.showAndWait();
+			}
 		}
 	}
 }

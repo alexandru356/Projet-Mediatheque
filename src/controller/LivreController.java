@@ -5,44 +5,56 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import model.Document;
 import model.Livre;
+import utils.GestionnaireDonnee;
 import utils.LivreReader;
 
 public class LivreController {
 
 	@FXML
 	private TableView<Livre> tableViewLivres;
-	
+
 	@FXML
 	private TableColumn<Livre, String> colNumDoc;
-	
+
 	@FXML
 	private TableColumn<Livre, String> colTitre;
-	
+
 	@FXML
 	private TableColumn<Livre, String> colAuteur;
-	
+
 	@FXML
 	private TableColumn<Livre, String> colDate;
-	
+
 	@FXML
 	private TableColumn<Livre, String> colEtat;
-	
+
 	@FXML
 	private TableColumn<Livre, Integer> colNbPret;
-	
+
 	@FXML
 	private TableColumn<Livre, String> colEmprunteur;
-	
-	private ObservableList<Livre> lstObsLivre = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
-	
-	public LivreController () {
-		
+
+	//private ObservableList<Livre> lstObsLivre = FXCollections.observableArrayList(LivreReader.chargerFichier("Livres.txt"));
+
+	public Livre getSelectedLivre() {
+		return tableViewLivres.getSelectionModel().getSelectedItem();
 	}
-	
 	@FXML
 	public void initialize () {
-		
+
+		ObservableList<Livre> livresFiltres = FXCollections.observableArrayList();
+
+		for (Document doc : GestionnaireDonnee.documentList) {
+			if (doc instanceof Livre) {
+				livresFiltres.add((Livre) doc);
+			}
+		}
+
+
+		tableViewLivres.setItems(livresFiltres);
+
 		colNumDoc.setCellValueFactory(donnee -> donnee.getValue().numDocProperty());
 		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
 		colAuteur.setCellValueFactory(donnee -> donnee.getValue().auteurProperty());
@@ -50,32 +62,34 @@ public class LivreController {
 		colEtat.setCellValueFactory(donnee -> donnee.getValue().etatProperty());
 		colNbPret.setCellValueFactory(donnee -> donnee.getValue().nbPretsProperty().asObject());
 		colEmprunteur.setCellValueFactory(donnee -> donnee.getValue().nomEmprunteurProperty());
-		
-		tableViewLivres.setItems(lstObsLivre);
 	}
 	public void ajouterLivre(Livre livre) {
-	    lstObsLivre.add(livre); 
-	    tableViewLivres.refresh(); 
+		GestionnaireDonnee.documentList.add(livre); 
+		tableViewLivres.getItems().add(livre);  
+		tableViewLivres.refresh();
 	}
-	public ObservableList<Livre> getObservableList() {
-	    return lstObsLivre;
-	}
+	//public ObservableList<Livre> getObservableList() {
+	//	return lstObsLivre;
+	//}
 	public TableView<Livre> getTableView() {
-	    return tableViewLivres;
+		return tableViewLivres;
 	}
 
-    public void filtrerDocuments(String texte, String filtreActif) {
-        ObservableList<Livre> livresFiltres = FXCollections.observableArrayList();
+	public void filtrerDocuments(String texte, String filtreActif) {
+		ObservableList<Livre> livresFiltres = FXCollections.observableArrayList();
 
-        for (Livre livre : lstObsLivre) {
-        	if ("auteur".equals(filtreActif) && livre.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
-        		livresFiltres.add(livre);
-            } else if ("motCle".equals(filtreActif) && livre.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
-            	livresFiltres.add(livre);
-            }
-        }
+		for (Document doc : GestionnaireDonnee.documentList) {
+			if (doc instanceof Livre) {
+				Livre livre = (Livre) doc;
+				if ("auteur".equals(filtreActif) && livre.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+					livresFiltres.add(livre);
+				} else if ("motCle".equals(filtreActif) && livre.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+					livresFiltres.add(livre);
+				}
+			}
+		}
 
-        tableViewLivres.setItems(livresFiltres);
-    }
+		tableViewLivres.setItems(livresFiltres);
+	}
 
 }

@@ -7,46 +7,56 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import model.Document;
+import model.Livre;
 import model.Periodique;
+import utils.GestionnaireDonnee;
 import utils.PeriodiqueReader;
 
 public class PeriodiqueController {
 
 	@FXML
 	private TableView<Periodique> tableViewPeriodique;
-	
+
 	@FXML
 	private TableColumn<Periodique, String> colNumDoc;
-	
+
 	@FXML
 	private TableColumn<Periodique, String> colTitre;
-	
+
 	@FXML
 	private TableColumn<Periodique, String> colDate;
-	
+
 	@FXML
 	private TableColumn<Periodique, String> colVol;
-	
+
 	@FXML
 	private TableColumn<Periodique, String> colNumPeriodique;
-	
+
 	@FXML
 	private TableColumn<Periodique, String> colEtat;
-	
+
 	@FXML
 	private TableColumn<Periodique, Integer> colNbPret;
-	
+
 	@FXML
 	private TableColumn<Periodique, String> colEmprunteur;
-	
-	private ObservableList<Periodique> lstObsPeriodique = FXCollections.observableArrayList(PeriodiqueReader.chargerFichier("Periodiques.txt"));
-	
-	public PeriodiqueController () {
-		
+
+
+	public Periodique getSelectedPeriodique() {
+		return tableViewPeriodique.getSelectionModel().getSelectedItem();
 	}
-	
 	@FXML
 	public void initialize () {
+
+		ObservableList<Periodique> lstObsPeriodique = FXCollections.observableArrayList();
+
+		for (Document doc : GestionnaireDonnee.documentList) {
+			if (doc instanceof Periodique) {
+				lstObsPeriodique.add((Periodique) doc);
+			}
+		}
+
 		colNumDoc.setCellValueFactory(donnee -> donnee.getValue().numDocProperty());
 		colTitre.setCellValueFactory(donnee -> donnee.getValue().titreProperty());
 		colDate.setCellValueFactory(donnee -> donnee.getValue().datePublicationFormattedProperty());
@@ -58,21 +68,30 @@ public class PeriodiqueController {
 
 		tableViewPeriodique.setItems(lstObsPeriodique);
 	}
-	
-
-    public void filtrerDocuments(String texte, String filtreActif) {
-        ObservableList<Periodique> periodiquesFiltres = FXCollections.observableArrayList();
-
-        for (Periodique periodiqueItem : lstObsPeriodique) {
-        	if ("auteur".equals(filtreActif) && periodiqueItem.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
-        		periodiquesFiltres.add(periodiqueItem);
-            } else if ("motCle".equals(filtreActif) && periodiqueItem.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
-            	periodiquesFiltres.add(periodiqueItem);
-            }
-        }
 
 
-        tableViewPeriodique.setItems(periodiquesFiltres);
-    }
+	public void filtrerDocuments(String texte, String filtreActif) {
+		ObservableList<Periodique> periodiquesFiltres = FXCollections.observableArrayList();
 
+
+		for (Document periodiqueItem : GestionnaireDonnee.documentList) {
+			if (periodiqueItem instanceof Periodique) {
+
+				Periodique periodique = (Periodique) periodiqueItem;
+
+				if ("auteur".equals(filtreActif) && periodique.getAuteur().toLowerCase().contains(texte.toLowerCase())) {
+					periodiquesFiltres.add(periodique);
+				} else if ("motCle".equals(filtreActif) && periodique.getMotsCles().toLowerCase().contains(texte.toLowerCase())) {
+					periodiquesFiltres.add(periodique);
+				}
+			}
+
+		}
+
+
+		tableViewPeriodique.setItems(periodiquesFiltres);
+	}
+	public TableView<Periodique> getTableView() {
+		return tableViewPeriodique;
+	}
 }

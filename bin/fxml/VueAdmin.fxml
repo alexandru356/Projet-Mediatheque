@@ -15,11 +15,11 @@
          <children>
             <TableView fx:id="tableViewPrepose" prefHeight="400.0" prefWidth="902.0">
               <columns>
-                <TableColumn fx:id="tcNumEmp" editable="false" prefWidth="180.0" text="Numero d'employe" />
+                <TableColumn fx:id="tcNumEmp" editable="false" prefWidth="180.0" text="Numéro d'employé" />
                 <TableColumn fx:id="tcNom" editable="false" prefWidth="170.0" text="Nom" />
                   <TableColumn fx:id="tcPrenom" editable="false" prefWidth="170.0" text="Prenom" />
                   <TableColumn fx:id="tcAdresse" editable="false" prefWidth="236.0" text="Adresse" />
-                  <TableColumn fx:id="tcTelephone" editable="false" prefWidth="145.0" text="Telephone" />
+                  <TableColumn fx:id="tcTelephone" editable="false" prefWidth="145.0" text="Téléphone" />
               </columns>
             </TableView>
          </children></AnchorPane>
@@ -29,8 +29,8 @@
                <content>
                   <VBox prefHeight="78.0" prefWidth="181.0">
                      <children>
-                        <Button fx:id="btnAjout" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#ajoutPrepose" prefHeight="25.0" prefWidth="167.0" text="Ajouter un prepose" />
-                        <Button fx:id="btnSupp" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false"  onAction="#supprimerPrepose" prefHeight="25.0" prefWidth="167.0" text="Supprimer un prepose">
+                        <Button fx:id="btnAjout" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#ajoutPrepose" prefHeight="25.0" prefWidth="167.0" text="Ajouter un préposé" />
+                        <Button fx:id="btnSupp" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#supprimerPrepose" prefHeight="25.0" prefWidth="167.0" text="Supprimer un preposé">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -39,7 +39,7 @@
                   </VBox>
                </content>
             </TitledPane>
-            <Button fx:id="btnDeconnexion" onAction="#deconnexion" alignment="CENTER" contentDisplay="TOP" layoutX="8.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" text="Deconnexion" />
+            <Button fx:id="btnDeconnexion" alignment="CENTER" contentDisplay="TOP" layoutX="8.0" layoutY="122.0" mnemonicParsing="false" onAction="#deconnexion" prefHeight="25.0" prefWidth="167.0" text="Déconnexion" />
          </children></AnchorPane>
   </items>
 </SplitPane>

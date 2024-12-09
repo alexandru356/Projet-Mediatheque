@@ -5,18 +5,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1156.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PretController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1156.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PretController">
    <children>
       <TableView fx:id="TableView" prefHeight="769.0" prefWidth="1156.0">
         <columns>
-          <TableColumn fx:id="tcNum" prefWidth="114.0" text="NumeroAdherent" />
+          <TableColumn fx:id="tcNum" prefWidth="114.0" text="NuméroAdhérent" />
           <TableColumn fx:id="tcNom" prefWidth="184.0" text="Nom" />
             <TableColumn fx:id="tcPrenom" prefWidth="192.0" text="Prenom" />
             <TableColumn fx:id="tcAdresse" prefWidth="355.0" text="Adresse" />
-            <TableColumn fx:id="tcTelephone" minWidth="3.0" prefWidth="134.0" text="Telephone" />
-            <TableColumn fx:id="tcPret" prefWidth="102.0" text="Prets actifs" />
-            <TableColumn fx:id="tcSolde" prefWidth="74.0" text="Solde du" />
+            <TableColumn fx:id="tcTelephone" minWidth="3.0" prefWidth="134.0" text="Téléphone" />
+            <TableColumn fx:id="tcPret" prefWidth="102.0" text="Prêts actifs" />
+            <TableColumn fx:id="tcSolde" prefWidth="74.0" text="Solde dû" />
         </columns>
       </TableView>
       <Button layoutX="1052.0" layoutY="775.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Annuler" />

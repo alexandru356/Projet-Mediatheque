@@ -19,6 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Document;
+import model.Livre;
 import utils.ValidationIdentification;
 
 public class CatalogueController {
@@ -95,7 +96,7 @@ public class CatalogueController {
 		try {
 			Stage currentStage = (Stage) btnQuitter.getScene().getWindow();
 			currentStage.close();
-			
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueIdentification.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
@@ -132,12 +133,12 @@ public class CatalogueController {
 			tfPrenom.clear();
 		}
 	}
-	
+
 	public void ouvrirDossier() {
 		try {
 			Stage currentStage = (Stage) btnQuitter.getScene().getWindow();
 			currentStage.close();
-			
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/vueDossier.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
@@ -149,54 +150,54 @@ public class CatalogueController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void Login() throws FileNotFoundException, IOException {
-		
-Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-		
+
+		Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+
 		if(rdIdentificationNom.isSelected()) {
-			
+
 			String nom = tfNom.getText();
 			String prenom = tfPrenom.getText();
-			
+
 			Boolean adherentValid = CatalogueLoggedController.connexionAdhNom(nom, prenom);
-			
+
 			//Pour faire des tests
 			//System.out.print("nom : ." + nom + ".");
-			
-			
+
+
 			//Gerer les messages d'erreurs different et si le login est bon
 			if(nom == "") {
-				
+
 				errorAlert.setTitle("Erreur");
 				errorAlert.setHeaderText("Nom invalide !");
 				errorAlert.setContentText("Vous n'avez pas tape votre nom.");
 				errorAlert.show();
-				
+
 			}else if(prenom == "") {
-				
+
 				errorAlert.setTitle("Erreur");
 				errorAlert.setHeaderText("Prenom invalide !");
 				errorAlert.setContentText("Vous n'avez pas tape votre prenom.");
 				errorAlert.show();
-				
+
 			}else if(adherentValid){
-				
+
 				ouvrirDossier();
-				
+
 			}else {
 				errorAlert.setTitle("Erreur");
 				errorAlert.setHeaderText("Compte invalide !");
 				errorAlert.setContentText("Les donnees que vous avez entre ne correspondent pas a un adherent valide.");
 				errorAlert.show();
 			}
-			
+
 		}else{
-			
+
 			String telephone = tfTelephone.getText();
-			
+
 			Boolean adherentValid = CatalogueLoggedController.connexionAdhTel(telephone);
-			
+
 			if (!ValidationIdentification.verifierFomartTelephone(telephone)) {
 				errorAlert.setTitle("Erreur");
 				errorAlert.setHeaderText("Numero de telephone invalide !");
@@ -212,13 +213,43 @@ Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 				errorAlert.show();
 			}
 		}
-		
+
 	}
 
 	public CatalogueController () {
 
 	}
+	public void getSelectedDocument() {
+		Document selectedDocument = docController.getSelectedDocument();
+		if (selectedDocument != null) {
+			System.out.println("Document sélectionné : " + selectedDocument);
+		} else {
+			System.out.println("Aucun document sélectionné.");
+		}
 
+		Livre selectedLivre = livreController.getSelectedLivre();
+		if (selectedLivre != null) {
+			System.out.println("Livre sélectionné : " + selectedLivre);
+		} else {
+			System.out.println("Aucun livre sélectionné.");
+		}
+
+		Document selectedDVD = dvdController.getSelectedDVD();
+		if (selectedDVD != null) {
+			System.out.println("DVD sélectionné : " + selectedDVD);
+		} else {
+			System.out.println("Aucun DVD sélectionné.");
+		}
+		
+		Document selectedPeriodique = periodiqueController.getSelectedPeriodique();
+		
+		if (selectedPeriodique != null) {
+			System.out.println("Periodique sélectionné : " + selectedPeriodique);
+		} else {
+			System.out.println("Aucun Periodique sélectionné.");
+		}
+		
+	}
 
 	@FXML
 	public void initialize () throws IOException {
@@ -265,7 +296,7 @@ Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 		group1.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
 			rechercherDansTousLesTabs(tfRecherche.getText());
 		});
-		
+
 		//si user selectionne le tab periodique, on desactive le bouton radio auteur 
 		//car periodique n'a pas d'auteur
 		tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {

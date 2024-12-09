@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="tvDocInfo" layoutX="14.0" layoutY="14.0" prefHeight="62.0" prefWidth="727.0">
         <columns>
-          <TableColumn fx:id="tcNumDoc" prefWidth="136.0" text="Numero de document" />
+          <TableColumn fx:id="tcNumDoc" prefWidth="136.0" text="Numéro de document" />
           <TableColumn fx:id="tcTitre" prefWidth="298.0" text="Titre" />
             <TableColumn fx:id="tcAuteur" prefWidth="172.0" text="Auteur/Realisateur" />
             <TableColumn fx:id="tdDate" prefWidth="120.0" text="Date de parution" />
@@ -17,11 +17,11 @@
       </TableView>
       <TableView fx:id="tvDocs" layoutX="14.0" layoutY="85.0" prefHeight="435.0" prefWidth="727.0">
         <columns>
-          <TableColumn fx:id="tcNumPret" prefWidth="124.0" text="Numero de pret" />
-          <TableColumn fx:id="tcDatePret" prefWidth="158.0" text="Date du pret" />
-            <TableColumn fx:id="tcDateRetourPrevu" minWidth="0.0" prefWidth="167.0" text="Date de retour prevu" />
+          <TableColumn fx:id="tcNumPret" prefWidth="124.0" text="Numéro de prêt" />
+          <TableColumn fx:id="tcDatePret" prefWidth="158.0" text="Date du prêt" />
+            <TableColumn fx:id="tcDateRetourPrevu" minWidth="0.0" prefWidth="167.0" text="Date de retour prévu" />
             <TableColumn fx:id="tcDateRetour" minWidth="4.0" prefWidth="168.0" text="Date de retour" />
-            <TableColumn fx:id="tcAmande" prefWidth="109.0" text="Amande" />
+            <TableColumn fx:id="tcAmande" prefWidth="109.0" text="Amende" />
         </columns>
       </TableView>
       <Button fx:id="btnQuitter" layoutX="747.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="191.0" text="Quitter" />
